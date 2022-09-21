@@ -1,109 +1,141 @@
-let moon_and_sun;
-let b1, b2, c1, c2;
-let tree;
+let moon_and_sun; // represents hour
+let lightBlue, lightPink, darkBlue, darkPink, green; // represents day or night
+let tree; // represents minute
 
 function setup() {
-  moon_and_sun = new Stars(50);
   createCanvas(700, 300);
-  background("#e0e4cc");
   smooth();
-  tree = new Tree();
-  b1 = color(36, 117, 146);
-  b2 = color(252, 153, 152);
-  c1 = color(4, 34, 47);
-  c2 = color(118, 37, 73);
+  lightBlue = color(36, 117, 146);
+  lightPink = color(252, 153, 152);
+  darkBlue = color(4, 34, 47);
+  darkPink = color(118, 37, 73);
+  green = color(24, 96, 72);
+  brightRed = color(255, 0, 0);
+  glowingYellow = color(254,252,215);
 }
 
 function draw() {
-  background("#FCF6E4");
+  background("fff0f0");
   rectMode(CENTER);
-  drawGround();
-  if (isDay()) {
-    tree.grow(
-      width / 2 - 10,
-      height / 2 - 100,
-      15, 
-      map(minute(), 0, 59, 0, (height * 2) / 3), b2, b1
-    );
-  } else {
-    tree.grow(
-      width / 2 - 10,
-      height / 2 - 100,
-      15,
-      map(minute(), 0, 59, 0, (height * 2) / 3), c2, c1
-    );
-  }
-  moon_and_sun.drawStars();
+  drawSky();
+
+  drawTrunck();
+  // Start the recursive flowering
+  let flowerSize = map(minute(), 0, 59, 30, height/2*0.8);
+  flower(flowerSize);
+  drawStar();
 }
 
-function drawGround() {
+function drawTrunck() {
+  let color1;
+  // Start the trunck from the bottom of the screen
+  translate(width / 2, height);
+  fill(green);
+  noStroke();
+  let cactusSize = map(minute(), 0, 59, 50, 200);
+
+  // draw the top round part of the cactus
+  arc(0, -cactusSize / 2, cactusSize, cactusSize, PI, 2 * PI, CHORD);
+
+  // draw the bottom stem of the cactus with a gradient
+  // check day or night for color selection
   if (isDay()) {
-    fill(b1);
+    color1 = lightPink;
   } else {
-    fill(c1);
+    color1 = darkPink;
   }
-  rect(
-    0,
-    (height * 2) / 3 + 60,
-    map(hour(), 0, 12, 0, width),
-    (height * 2) / 5
-  );
+  for (let i = cactusSize; i >= 0; i--) {
+    let interval = map(i, 0, cactusSize, 0, 1);
+    let c = lerpColor(color1, green, interval);
+    stroke(c);
+    line(-cactusSize / 2, -i / 2, cactusSize / 2, -i / 2);
+  }
+
+  // Move to the end of the trunck for the flowering
+  translate(0, -cactusSize);
+}
+
+function flower(h) {
+  let c, theta;
+  // pink flowers move based on seconds
+  let a = map(millis(), 0, 1000 * 60, 0, 360);
+  // Convert it to radians
+  theta = radians(a);
+
+  noFill();
+  // check day or night for color selection
+  if (isDay()) {
+    c = lightPink;
+  } else {
+    c = darkPink;
+  }
+  stroke(c);
+  strokeWeight(2);
+  // Each flower will be half the size of the previous one
+  h *= 0.5;
+  // Exit recursive functions when the length of the flower is 10 pixels or less
+  if (h > 2) {
+    // right flowers
+    push();
+    rotate(theta); // Rotate by theta
+    quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h); // Draw the flower
+    translate(0, -h); // Move to the end of the flower
+    flower(h); // call myself to draw two new floweres
+    pop();
+
+    // left flowers
+    push();
+    rotate(-theta);
+    quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h);
+    translate(0, -h);
+    flower(h);
+    pop();
+  }
 }
 
 function isDay() {
-  let flag = true;
-  let day = second() <= 52 && second() > 23;
-  if (day == true) {
-    drawSky(0, 0, width, (height * 2) / 3, b1, b2);
-    flag = true;
-  } else if ((day = second() > 52 || second() <= 23)) {
-    drawSky(0, 0, width, (height * 2) / 3, c1, c2);
-    flag = false;
-  }
-  return flag;
+  let isDay = hour() <= 17 && hour() > 7;
+  return isDay;
 }
 
-function drawSky(x, y, w, h, c1, c2) {
+function drawSky() {
+  let x = 0;
+  let y = 0;
+  let w = width;
+  let h = height;
+  let color1, color2;
+  if (isDay()) {
+    color1 = lightBlue;
+    color2 = lightPink;
+  } else {
+    color1 = darkBlue;
+    color2 = darkPink;
+  }
   for (let i = y; i <= y + h; i++) {
     let interval = map(i, y, y + h, 0, 1);
-    let c = lerpColor(c1, c2, interval);
+    let c = lerpColor(color1, color2, interval);
     stroke(c);
     line(x, i, x + w, i);
   }
 }
 
-class Stars {
-  constructor(r) {
-    this.radius = r;
+function drawStar() {
+  // check day or night for color selection
+  let c;
+  if (isDay()) {
+    c = brightRed;
+  } else {
+    c = glowingYellow;
   }
-
-  drawStars() {
-    push();
-    translate(width / 2, (height * 2) / 3);
-    let angle = map(second(), 0, 59, 0, 2 * PI);
-    rotate(angle);
-    noStroke();
-    fill(255, 0, 0);
-    circle(160, 160, this.radius);
-    fill(255);
-    circle(-160, -160, this.radius);
-    pop();
-  }
-}
-
-class Tree {
-  constructor() {
-    this.height = 0;
-  }
-
-  grow(x, y, w, h, c1, c2) {
-    this.height = map(minute(), 0, 59, (height * 2) / 3, 0);
-    //rectMode(CENTER);
-    for (let i = y + h; i >= y; i--) {
-      let interval = map(i, y, y + h, 0, 1);
-      let c = lerpColor(c1, c2, interval);
-      stroke(c);
-      line(x, i, x + w, i);
-    }
-  }
+  
+  push();
+  // move the rotation point to the bottom-middle of the canvas
+  translate(width/2, height);
+  let a = map(hour(), 0, 23, 180, 360);
+  let theta = radians(a);
+  rotate(theta);
+  noStroke();
+  fill(c);
+  circle(width/3, -height*3/4, 50);
+  pop();
 }

@@ -34,7 +34,7 @@ function draw() {
 
   drawTrunck();
   // Start the recursive flowering
-  let flowerSize = map(minute(), 0, 59, 30, height/2*0.8);
+  let flowerSize = map(minute(), 0, 59, 30, height / 3);
   flower(flowerSize);
   drawStar();
 }
@@ -45,7 +45,7 @@ function drawTrunck() {
   translate(width / 2, height);
   fill(oliveGreen);
   noStroke();
-  let cactusSize = map(minute(), 0, 59, 50, 200);
+  let cactusSize = map(minute(), 0, 59, height * 0.1, height * 0.9); // cactus size represents minutes
 
   // draw the top round part of the cactus
   arc(0, -cactusSize / 2, cactusSize, cactusSize, PI, 2 * PI, CHORD);
@@ -63,7 +63,7 @@ function drawTrunck() {
   }
 
   // Move to the end of the trunck for the flowering
-  translate(0, -cactusSize);
+  translate(0, -cactusSize / 1.5);
 }
 
 function flower(h) {
@@ -76,7 +76,8 @@ function flower(h) {
   noFill();
   c = color(238, 232, 170);
   stroke(c);
-  strokeWeight(2);
+  strokeWeight(0.5);
+
   // Each flower will be half the size of the previous one
   h *= 0.5;
   // Exit recursive functions when the length of the flower is 10 pixels or less

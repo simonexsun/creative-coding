@@ -82,19 +82,35 @@ function flower(h) {
   h *= 0.5;
   // Exit recursive functions when the length of the flower is 10 pixels or less
   if (h > 2) {
-    // right flowers
+    // top-right flowers
     push();
     rotate(theta); // Rotate by theta
     quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h); // Draw the flower
-    translate(0, -h); // Move to the end of the flower
+    translate(theta * 20, -theta * 20); // Expend by theta
     flower(h); // call myself to draw two new floweres
     pop();
 
-    // left flowers
+    // top-left flowers
     push();
     rotate(-theta);
     quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h);
-    translate(0, -h);
+    translate(theta * 20, -theta * 20);
+    flower(h);
+    pop();
+
+    // bottom-right flowers
+    push();
+    rotate(-theta - PI);
+    quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h);
+    translate(theta * 20, -theta * 20);
+    flower(h);
+    pop();
+
+    // bottom-left flowers
+    push();
+    rotate(theta + PI);
+    quad(-h / 2, 0, 0, -h, h / 2, 0, 0, h);
+    translate(theta * 20, -theta * 20);
     flower(h);
     pop();
   }

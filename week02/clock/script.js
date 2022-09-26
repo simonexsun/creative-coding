@@ -68,10 +68,12 @@ function drawTrunck() {
 
 function flower(h) {
   let c, theta;
-  // pink flowers move based on seconds
-  let a = map(millis(), 0, 1000 * 60, 0, 360);
+  // flowers move based on seconds
+  let a = map(millis(), 0, 1000, 0, PI);
+  let sinA = sin(a);
   // Convert it to radians
-  theta = radians(a);
+  theta = sinA;
+  // console.log(theta);
 
   noFill();
   c = color(238, 232, 170);

@@ -1,19 +1,30 @@
 // The cactus blooming animation is inspired by Daniel Shiffman's Recursive Tree Example https://processing.org/examples/tree.html
 
 let moon_and_sun; // represents hour
-let lightBlue, lightPink, darkBlue, darkPink, green; // represents day or night
+let babyBlue, babyPink, oliveGreen, sunColor;
 let tree; // represents minute
 
 function setup() {
   createCanvas(325, 325);
   smooth();
-  lightBlue = color(36, 117, 146);
-  lightPink = color(252, 153, 152);
-  darkBlue = color(4, 34, 47);
-  darkPink = color(118, 37, 73);
-  green = color(24, 96, 72);
-  brightRed = color(255, 0, 0);
-  glowingYellow = color(254,252,215);
+
+  babyBlue = color(
+    map(hour(), 0, 23, 36, 4),
+    map(hour(), 0, 23, 117, 34),
+    map(hour(), 0, 23, 146, 47)
+  );
+  babyPink = color(
+    map(hour(), 0, 23, 252, 118),
+    map(hour(), 0, 23, 153, 37),
+    map(hour(), 0, 23, 152, 73)
+  );
+
+  oliveGreen = color(24, 96, 72);
+  sunColor = color(
+    map(hour(), 0, 23, 255, 254),
+    map(hour(), 0, 23, 0, 252),
+    map(hour(), 0, 23, 0, 215)
+  );
 }
 
 function draw() {
@@ -29,10 +40,10 @@ function draw() {
 }
 
 function drawTrunck() {
-  let color1;
+  let color1, color2;
   // Start the trunck from the bottom of the screen
   translate(width / 2, height);
-  fill(green);
+  fill(oliveGreen);
   noStroke();
   let cactusSize = map(minute(), 0, 59, 50, 200);
 
@@ -41,14 +52,12 @@ function drawTrunck() {
 
   // draw the bottom stem of the cactus with a gradient
   // check day or night for color selection
-  if (isDay()) {
-    color1 = lightPink;
-  } else {
-    color1 = darkPink;
-  }
+
+  color1 = babyPink;
+  color2 = oliveGreen;
   for (let i = cactusSize; i >= 0; i--) {
     let interval = map(i, 0, cactusSize, 0, 1);
-    let c = lerpColor(color1, green, interval);
+    let c = lerpColor(color1, color2, interval);
     stroke(c);
     line(-cactusSize / 2, -i / 2, cactusSize / 2, -i / 2);
   }
@@ -65,12 +74,7 @@ function flower(h) {
   theta = radians(a);
 
   noFill();
-  // check day or night for color selection
-  if (isDay()) {
-    c = lightPink;
-  } else {
-    c = darkPink;
-  }
+  c = color(238, 232, 170);
   stroke(c);
   strokeWeight(2);
   // Each flower will be half the size of the previous one
@@ -106,13 +110,10 @@ function drawSky() {
   let w = width;
   let h = height;
   let color1, color2;
-  if (isDay()) {
-    color1 = lightBlue;
-    color2 = lightPink;
-  } else {
-    color1 = darkBlue;
-    color2 = darkPink;
-  }
+
+  color1 = babyBlue;
+  color2 = babyPink;
+
   for (let i = y; i <= y + h; i++) {
     let interval = map(i, y, y + h, 0, 1);
     let c = lerpColor(color1, color2, interval);
@@ -125,11 +126,11 @@ function drawStar() {
   // check day or night for color selection
   let c;
   if (isDay()) {
-    c = brightRed;
+    c = sunColor;
   } else {
     c = glowingYellow;
   }
-  
+
   push();
   // move the rotation point to the bottom-middle of the canvas
   translate(width/2, height);

@@ -7,24 +7,24 @@ let tree; // represents minute
 function setup() {
   createCanvas(325, 325);
   smooth();
-
+  
   babyBlue = color(
-    map(hour(), 0, 23, 36, 4),
-    map(hour(), 0, 23, 117, 34),
-    map(hour(), 0, 23, 146, 47)
-  );
+    map(hour()-7, 0, 23, 36, 2),
+    map(hour()-7, 0, 23, 117, 17),
+    map(hour()-7, 0, 23, 146, 23)
+  ); //  from light blue to dark blue
   babyPink = color(
-    map(hour(), 0, 23, 252, 118),
-    map(hour(), 0, 23, 153, 37),
-    map(hour(), 0, 23, 152, 73)
-  );
+    map(hour()-7, 0, 23, 252, 118),
+    map(hour()-7, 0, 23, 153, 37),
+    map(hour()-7, 0, 23, 152, 73)
+  ); // from pink to purple
 
   oliveGreen = color(24, 96, 72);
   sunColor = color(
-    map(hour(), 0, 23, 255, 254),
-    map(hour(), 0, 23, 0, 252),
-    map(hour(), 0, 23, 0, 215)
-  );
+    map(hour()-7, 0, 23, 255, 254),
+    map(hour()-7, 0, 23, 0, 252),
+    map(hour()-7, 0, 23, 0, 215)
+  ); // from red to light yellow
 }
 
 function draw() {
@@ -73,10 +73,9 @@ function flower(h) {
   let sinA = sin(a);
   // Convert it to radians
   theta = sinA;
-  // console.log(theta);
 
   noFill();
-  c = color(238, 232, 170);
+  c = color(238,232,170); //bright golden
   stroke(c);
   strokeWeight(0.5);
 
@@ -133,6 +132,7 @@ function drawSky() {
   color1 = babyBlue;
   color2 = babyPink;
 
+  strokeWeight(map(hour()-7, 0, 23, 0.5, 2));
   for (let i = y; i <= y + h; i++) {
     let interval = map(i, y, y + h, 0, 1);
     let c = lerpColor(color1, color2, interval);

@@ -5,7 +5,7 @@ let lightBlue, lightPink, darkBlue, darkPink, green; // represents day or night
 let tree; // represents minute
 
 function setup() {
-  createCanvas(700, 300);
+  createCanvas(325, 325);
   smooth();
   lightBlue = color(36, 117, 146);
   lightPink = color(252, 153, 152);

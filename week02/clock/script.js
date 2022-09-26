@@ -142,14 +142,6 @@ function drawSky() {
 }
 
 function drawStar() {
-  // check day or night for color selection
-  let c;
-  if (isDay()) {
-    c = sunColor;
-  } else {
-    c = glowingYellow;
-  }
-
   push();
   // move the rotation point to the bottom-middle of the canvas
   translate(0, 0);
@@ -157,7 +149,7 @@ function drawStar() {
   rotate(-PI / 2);
   rotate(a);
   noStroke();
-  fill(c);
+  fill(sunColor);
   circle(0, -height / 5, 25);
   pop();
 }

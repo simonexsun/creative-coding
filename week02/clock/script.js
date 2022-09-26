@@ -1,7 +1,7 @@
 // The cactus blooming animation is inspired by Daniel Shiffman's Recursive Tree Example https://processing.org/examples/tree.html
 
 let moon_and_sun; // represents hour
-let babyBlue, babyPink, oliveGreen, sunColor;
+let babyBlue, babyPink, oliveGreen, sunColor, brightGold;
 let tree; // represents minute
 
 function setup() {
@@ -9,22 +9,24 @@ function setup() {
   smooth();
   
   babyBlue = color(
-    map(hour()-7, 0, 23, 36, 2),
-    map(hour()-7, 0, 23, 117, 17),
-    map(hour()-7, 0, 23, 146, 23)
+    map(hour()-7, 0, 24, 36, 2),
+    map(hour()-7, 0, 24, 117, 17),
+    map(hour()-7, 0, 24, 146, 23)
   ); //  from light blue to dark blue
   babyPink = color(
-    map(hour()-7, 0, 23, 252, 118),
-    map(hour()-7, 0, 23, 153, 37),
-    map(hour()-7, 0, 23, 152, 73)
+    map(hour()-7, 0, 24, 252, 118),
+    map(hour()-7, 0, 24, 153, 37),
+    map(hour()-7, 0, 24, 152, 73)
   ); // from pink to purple
 
   oliveGreen = color(24, 96, 72);
   sunColor = color(
-    map(hour()-7, 0, 23, 255, 254),
-    map(hour()-7, 0, 23, 0, 252),
-    map(hour()-7, 0, 23, 0, 215)
+    map(hour()-7, 0, 24, 255, 254),
+    map(hour()-7, 0, 24, 0, 252),
+    map(hour()-7, 0, 24, 0, 215)
   ); // from red to light yellow
+  
+  brightGold = color(238,232,170);
 }
 
 function draw() {
@@ -75,8 +77,7 @@ function flower(h) {
   theta = sinA;
 
   noFill();
-  c = color(238,232,170); //bright golden
-  stroke(c);
+  stroke(brightGold);
   strokeWeight(0.5);
 
   // Each flower will be half the size of the previous one
@@ -115,11 +116,6 @@ function flower(h) {
     flower(h);
     pop();
   }
-}
-
-function isDay() {
-  let isDay = hour() <= 17 && hour() > 7;
-  return isDay;
 }
 
 function drawSky() {

@@ -134,12 +134,12 @@ function drawStar() {
 
   push();
   // move the rotation point to the bottom-middle of the canvas
-  translate(width/2, height);
-  let a = map(hour(), 0, 23, 180, 360);
-  let theta = radians(a);
-  rotate(theta);
+  translate(0, 0);
+  let a = map(hour(), 0, 23, 0, PI);
+  rotate(-PI / 2);
+  rotate(a);
   noStroke();
   fill(c);
-  circle(width/3, -height*3/4, 50);
+  circle(0, -height / 5, 25);
   pop();
 }

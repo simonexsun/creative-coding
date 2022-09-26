@@ -138,14 +138,22 @@ function drawSky() {
 }
 
 function drawStar() {
+  // draw star track
   push();
-  // move the rotation point to the bottom-middle of the canvas
-  translate(0, 0);
-  let a = map(hour(), 0, 23, 0, PI);
+  strokeWeight(2);
+  stroke(brightGold);
+  strokeCap(PROJECT);
+  noFill();
+  arc(0, 15, height*3/5, height*3/5, PI, 2*PI);
+  pop();
+  
+  // draw star
+  push();
+  let a = map(hour(), 0, 24, 0, PI);
   rotate(-PI / 2);
   rotate(a);
   noStroke();
   fill(sunColor);
-  circle(0, -height / 5, 25);
+  circle(0, -height/4, 25);
   pop();
 }

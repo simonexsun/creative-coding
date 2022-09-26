@@ -1,3 +1,5 @@
+// The cactus blooming animation is inspired by Daniel Shiffman's Recursive Tree Example https://processing.org/examples/tree.html
+
 let moon_and_sun; // represents hour
 let lightBlue, lightPink, darkBlue, darkPink, green; // represents day or night
 let tree; // represents minute

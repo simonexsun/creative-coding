@@ -85,17 +85,13 @@ class Ball {
     let intensity = 300;
 
     // amplify with easing
-    //     let easing = 0.5;
-    //     let targetD = intensity * vol;
-    //     let dd = targetD - this.d;
-    //     this.d = dd * easing;
+    // let easing = 0.5;
+    // let targetD = intensity * vol;
+    // let dd = targetD - this.d;
+    // this.d = dd * easing;
 
     // without easing
     this.d = vol * intensity;
-
-    // Q: why does this.d = 0????
-    // this.d *= vol * intensity;
-    // console.log(vol * intensity);
   }
 
   display() {

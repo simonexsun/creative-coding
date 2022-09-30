@@ -1,4 +1,3 @@
-
 // loading music tutorial from https://nishanc.medium.com/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07
 // easing tutorial from https://p5js.org/examples/input-easing.html
 
@@ -42,10 +41,9 @@ function draw() {
   circlingBall.display();
   ampBall.amplify(vol);
   ampBall.display();
+  myBox.display();
   lines.amplify(vol);
   lines.display();
-  myBox.rotate();
-  myBox.display();
 }
 
 // function touchStarted() {

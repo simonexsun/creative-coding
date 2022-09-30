@@ -110,18 +110,14 @@ class Box {
     this.colorGold = color(215, 190, 105);
   }
 
-  rotate() {
+  display() {
     noFill();
     strokeWeight(0.5);
     stroke(this.colorGold);
-    // why does push and pop not work here?
-    // push();
+    push();
     rotateX(frameCount * 0.01);
     rotateY(frameCount * 0.01);
-    // pop();
-  }
-
-  display() {
     box(this.edge);
+    pop();
   }
 }

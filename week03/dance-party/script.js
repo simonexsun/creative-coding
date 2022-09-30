@@ -5,9 +5,13 @@ let song, amp;
 let circlingBall, ampBall, lines, mybox;
 let bouncingBalls = [];
 
+let myFont;
+
 function preload() {
   // preload audio
   song = loadSound("audio/giorgui-cut.mp3");
+  // preload font
+  myFont = loadFont("fonts/PoiretOne-Regular.ttf");
 }
 
 function setup() {
@@ -29,7 +33,19 @@ function setup() {
 
 function draw() {
   background(0);
+  
+  //display text if the music is not playing
+  if(getAudioContext().state=='suspended'){
+    push();
+    textFont(myFont);
+    textSize(20);
+    fill('white');
+    textAlign(CENTER, BOTTOM);
+    text('click anywhere to play music', -width/2, height*0.4, width);
+    pop();
+  }
 
+  
   let vol = amp.getLevel();
 
   // operate object methods
@@ -46,6 +62,8 @@ function draw() {
   lines.display();
 }
 
-// function touchStarted() {
-//   getAudioContext().resume();
-// }
+// Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+// Click on the web page to start audio 
+function touchStarted() {
+  getAudioContext().resume();   
+}

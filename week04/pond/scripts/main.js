@@ -4,14 +4,14 @@ let ripples = [];
 let leaves = [];
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowWidth);
   s = new Scribble();
 
   waterColor = color(182, 201, 185);
   leafColor = color(90, 140, 127);
 
   //create objects
-  for(let i = 0; i < 5; i ++){
+  for(let i = 0; i < 10; i ++){
     leaves.push(new Leaf());
   }
 }
@@ -22,6 +22,8 @@ function draw() {
   ripples.forEach((ripple) => {
     ripple.display();
   });
+
+  }
 
   leaves.forEach((leaf) => {
     leaf.display();
@@ -36,4 +38,8 @@ function makeNewRipple() {
   let newRipple = new Ripple();
   ripples.push(newRipple);
   console.log(ripples);
+}
+
+function detectCollision(){
+
 }

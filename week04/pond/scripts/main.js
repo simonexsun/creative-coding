@@ -1,6 +1,7 @@
 let s;
 let waterColor, leafColor;
 let ripples = [];
+let leaves = [];
 
 function setup() {
   createCanvas(400, 400);
@@ -8,6 +9,11 @@ function setup() {
 
   waterColor = color(182, 201, 185);
   leafColor = color(90, 140, 127);
+
+  //create objects
+  for(let i = 0; i < 5; i ++){
+    leaves.push(new Leaf());
+  }
 }
 
 function draw() {
@@ -17,11 +23,9 @@ function draw() {
     ripple.display();
   });
 
-  noStroke();
-  fill(leafColor);
-  s.scribbleEllipse(100, 200, 50, 50);
-  fill(waterColor);
-  arc(100,200, 55, 55, PI + QUARTER_PI, PI+HALF_PI);
+  leaves.forEach((leaf) => {
+    leaf.display();
+  });
 }
 
 function mousePressed() {

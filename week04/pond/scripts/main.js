@@ -90,6 +90,14 @@ function mouseDragged() {
       leaf.y = mouseY;
     }
   });
+
+  if (!frogFound) {
+    if (!isFrogCovered(leaves[2].x, leaves[2].y, leaves[2].d / 2)) {
+      // image(frogGif, frogX, frogY, frogSize, frogSize);
+      frogCall.play();
+      frogFound = true;
+    }
+  }
 }
 
 function mouseReleased() {
@@ -101,11 +109,6 @@ function mouseReleased() {
   leaves.forEach((leaf) => {
     if (isMouseInside(leaf.x, leaf.y, leaf.d / 2)) {
       leaf.reduct();
-      if (!isFrogCovered(leaf.x, leaf.y, leaf.d / 2) && !frogFound) {
-        // image(frogGif, frogX, frogY, frogSize, frogSize);
-        frogCall.play();
-        frogFound = true;
-      }
     }
   });
 }

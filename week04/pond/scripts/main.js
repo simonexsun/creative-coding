@@ -1,16 +1,21 @@
 let s; // scribble
-let myFont;
+let myFont, frogGif; // UI
 let waterSounds = [];
-let waterBloop1, waterBloop2, waterBloop3; // sound variables
+let waterBloop1, waterBloop2, waterBloop3, frogCall; // sound variables
 let waterColor, leafColor; // color variables
 let ripples = [];
-let leaves = []; // object variables
+let leaves = [];
+let frog, frogX, frogY, frogFound; // object variables
 
 function preload() {
   // preload audio
   waterBloop1 = loadSound("./audios/water-bloop-1.mp3");
   waterBloop2 = loadSound("./audios/water-bloop-2.mp3");
   waterBloop3 = loadSound("./audios/water-bloop-3.mp3");
+  frogCall = loadSound("./audios/frog-crock.mp3");
+
+  //preload img
+  frogGif = loadImage("img/frog.gif");
 
   // preload font
   // myFont = loadFont("fonts/PoiretOne-Regular.ttf");
@@ -30,11 +35,17 @@ function setup() {
   leafColor = color(90, 140, 127);
 
   //create objects
-  for (let i = 0; i < width / 8; i++) {
+  for (let i = 0; i < width / 10; i++) {
     leaves.push(new Leaf());
   }
   console.log(leaves);
   removeCollideLeaves();
+
+  // design frog position and size
+  frogX = leaves[2].x;
+  frogY = leaves[2].y;
+  frogSize = leaves[2].d;
+  frogFound = false;
 }
 
 function draw() {
@@ -45,6 +56,10 @@ function draw() {
   ripples.forEach((ripple) => {
     ripple.display();
   });
+
+  // display frog
+  imageMode(CENTER);
+  image(frogGif, frogX, frogY, frogSize, frogSize);
 
   leaves.forEach((leaf) => {
     leaf.display();
@@ -77,6 +92,11 @@ function mouseReleased() {
   leaves.forEach((leaf) => {
     if (isMouseInside(leaf.x, leaf.y, leaf.d / 2)) {
       leaf.reduct();
+      if (!isFrogCovered(leaf.x, leaf.y, leaf.d / 2) && !frogFound) {
+        // image(frogGif, frogX, frogY, frogSize, frogSize);
+        frogCall.play();
+        frogFound = true;
+      }
     }
   });
 }
@@ -90,6 +110,15 @@ function makeNewRipple() {
 function isMouseInside(x, y, r) {
   let d = dist(mouseX, mouseY, x, y);
   if (d <= r) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isFrogCovered(x, y, r) {
+  let d = dist(frogX, frogY, x, y);
+  if (d <= r / 2) {
     return true;
   } else {
     return false;

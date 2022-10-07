@@ -1,7 +1,9 @@
-class frog extends leaf() {
+class Frog extends Leaf() {
   constructor() {
     super();
   }
 
-  display() {}
+  display() {
+    image(frogGif, 0, 0);
+  }
 }

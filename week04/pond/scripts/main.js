@@ -1,4 +1,4 @@
-let s; // scribble 
+let s; // scribble
 let myFont;
 let waterSounds = [];
 let waterBloop1, waterBloop2, waterBloop3; // sound variables
@@ -6,7 +6,7 @@ let waterColor, leafColor; // color variables
 let ripples = [];
 let leaves = []; // object variables
 
-function preload(){
+function preload() {
   // preload audio
   waterBloop1 = loadSound("./audios/water-bloop-1.mp3");
   waterBloop2 = loadSound("./audios/water-bloop-2.mp3");
@@ -30,7 +30,7 @@ function setup() {
   leafColor = color(90, 140, 127);
 
   //create objects
-  for(let i = 0; i < width/8; i ++){
+  for (let i = 0; i < width / 8; i++) {
     leaves.push(new Leaf());
   }
   console.log(leaves);
@@ -51,20 +51,17 @@ function draw() {
   });
 }
 
-function mousePressed(){
-  console.log('selected');
+function mousePressed() {
   leaves.forEach((leaf) => {
-    if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
+    if (isMouseInside(leaf.x, leaf.y, leaf.d / 2)) {
       leaf.enlarge();
     }
   });
-  // leaf.reduct();
 }
 
-function mouseDragged(){
-  console.log('dragged');
+function mouseDragged() {
   leaves.forEach((leaf) => {
-    if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
+    if (isMouseInside(leaf.x, leaf.y, leaf.d / 2)) {
       leaf.x = mouseX;
       leaf.y = mouseY;
     }
@@ -73,12 +70,12 @@ function mouseDragged(){
 
 function mouseReleased() {
   makeNewRipple();
-  
+
   let waterBloop = random(waterSounds);
   waterBloop.play();
 
   leaves.forEach((leaf) => {
-    if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
+    if (isMouseInside(leaf.x, leaf.y, leaf.d / 2)) {
       leaf.reduct();
     }
   });
@@ -90,26 +87,26 @@ function makeNewRipple() {
   console.log(ripples);
 }
 
-function isMouseInside(x, y, r){
+function isMouseInside(x, y, r) {
   let d = dist(mouseX, mouseY, x, y);
-  if(d <= r){
-    return true; 
+  if (d <= r) {
+    return true;
   } else {
-    return false; 
+    return false;
   }
 }
 
-function removeCollideLeaves(){
+function removeCollideLeaves() {
   // detect the collision of leaves
-  for(let i = 0; i < leaves.length-1; i ++){
-    for(let j = i+1; j < leaves.length-1; j++){
+  for (let i = 0; i < leaves.length - 1; i++) {
+    for (let j = i + 1; j < leaves.length - 1; j++) {
       // get distance between two leaves
       let d = dist(leaves[i].x, leaves[i].y, leaves[j].x, leaves[j].y);
       // there is collision if distance between two is less than sum of two radius
-      if (d <= leaves[i].d/2 + leaves[j].d/2) {
+      if (d <= leaves[i].d / 2 + leaves[j].d / 2) {
         console.log(`collide ${i}`);
         // remove objects that collide
-        leaves.splice(j,j);
+        leaves.splice(j, j);
       }
     }
   }

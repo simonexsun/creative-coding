@@ -10,7 +10,7 @@ class Ripple {
   display() {
     //stop looping when the ripple is out of canvas frame
     if (this.outerDiam < width * 3) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
         let diam = this.outerDiam - (20 + i * 3) * i;
         if (diam > 0) {
           // the bigger the circle gets, the closer its color is too the waterColor: color(182,201,185); starting from color(87,117,91)

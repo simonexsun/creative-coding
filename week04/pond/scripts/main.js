@@ -168,7 +168,7 @@ function displayUI() {
   text("drag leaves to", width / 2, margine);
 
   textSize(big_font_size);
-  text("find the frog", width / 2, margine + line_space);
+  text("find the frog !!", width / 2, margine + line_space);
 
   stroke(255);
   strokeWeight(2);

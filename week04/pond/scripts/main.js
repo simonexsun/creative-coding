@@ -170,5 +170,12 @@ function displayUI() {
   stroke(255);
   strokeWeight(2);
   noFill();
-  s.scribbleRect(width / 2, height / 2, width - margine, height - margine);
+  rectMode(CENTER);
+  // s.scribbleFilling(width / 2, height * 0.13, 5, 20);
+  s.scribbleRect(
+    width / 2,
+    height * 0.13,
+    width / 3,
+    small_font_size + big_font_size + line_space
+  );
 }

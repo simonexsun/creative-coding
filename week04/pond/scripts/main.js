@@ -4,7 +4,7 @@ let ripples = [];
 let leaves = [];
 
 function setup() {
-  createCanvas(windowWidth, windowWidth);
+  createCanvas(windowWidth, windowHeight);
   s = new Scribble();
 
   waterColor = color(182, 201, 185);
@@ -20,7 +20,9 @@ function setup() {
 
 function draw() {
   background(waterColor);
+  // display objects at low frame rate
   frameRate(5);
+
   ripples.forEach((ripple) => {
     ripple.display();
   });
@@ -28,6 +30,7 @@ function draw() {
   leaves.forEach((leaf) => {
     leaf.display();
   });
+
 }
 
 function mouseReleased() {

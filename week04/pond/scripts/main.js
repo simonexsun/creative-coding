@@ -18,7 +18,7 @@ function preload() {
   frogGif = loadImage("img/frog.png");
 
   // preload font
-  // myFont = loadFont("fonts/PoiretOne-Regular.ttf");
+  myFont = loadFont("fonts/IndieFlower-Regular.ttf");
 }
 
 function setup() {
@@ -57,6 +57,8 @@ function draw() {
   ripples.forEach((ripple) => {
     ripple.display();
   });
+
+  displayUI();
 
   // update seed at low frame rate
   if (frameCount % 30 == 0) {
@@ -147,4 +149,26 @@ function removeCollideLeaves() {
     }
   }
   console.log(leaves);
+}
+
+function displayUI() {
+  let margine = height * 0.05;
+  let small_font_size = width / 35;
+  let big_font_size = width / 20;
+  let line_space = small_font_size * 1.2;
+
+  fill(255);
+  textFont(myFont);
+  textAlign(CENTER, TOP);
+
+  textSize(small_font_size);
+  text("drag leaves to", width / 2, margine);
+
+  textSize(big_font_size);
+  text("find the frog", width / 2, margine + line_space);
+
+  stroke(255);
+  strokeWeight(2);
+  noFill();
+  s.scribbleRect(width / 2, height / 2, width - margine, height - margine);
 }

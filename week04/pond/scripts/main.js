@@ -15,7 +15,7 @@ function preload() {
   frogCall = loadSound("./audios/frog-crock.mp3");
 
   //preload img
-  frogGif = loadImage("img/frog.gif");
+  frogGif = loadImage("img/frog.png");
 
   // preload font
   // myFont = loadFont("fonts/PoiretOne-Regular.ttf");

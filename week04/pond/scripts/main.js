@@ -1,4 +1,4 @@
-let s; // scribble
+let s, seed; // scribble
 let myFont, frogGif; // UI
 let waterSounds = [];
 let waterBloop1, waterBloop2, waterBloop3, frogCall; // sound variables
@@ -24,6 +24,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   s = new Scribble();
+  seed = 0;
 
   //define sound
   waterSounds.push(waterBloop1);
@@ -51,11 +52,17 @@ function setup() {
 function draw() {
   background(waterColor);
   // display objects at low frame rate
-  frameRate(5);
+  // frameRate(5);
 
   ripples.forEach((ripple) => {
     ripple.display();
   });
+
+  // update seed at low frame rate
+  if (frameCount % 30 == 0) {
+    seed++;
+  }
+  randomSeed(seed);
 
   // display frog
   imageMode(CENTER);

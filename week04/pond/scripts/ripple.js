@@ -11,7 +11,7 @@ class Ripple {
     //stop looping when the ripple is out of canvas frame
     if (this.outerDiam < width * 3) {
       for (let i = 0; i < 3; i++) {
-        let diam = this.outerDiam - (10 + i * 3) * i;
+        let diam = this.outerDiam - (30 + i * 3) * i;
         if (diam > 0) {
           // the bigger the circle gets, the closer its color is too the waterColor: color(182,201,185); starting from color(87,117,91)
           let fadeR = map(diam, 0, width * 1, 87, 182);
@@ -23,7 +23,7 @@ class Ripple {
           s.scribbleEllipse(this.x, this.y, diam, diam);
         }
       }
-      this.outerDiam = this.outerDiam + 30;
+      this.outerDiam = this.outerDiam + 8;
     }
   }
 }

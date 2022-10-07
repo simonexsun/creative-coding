@@ -45,7 +45,7 @@ function setup() {
   // design frog position and size
   frogX = leaves[2].x;
   frogY = leaves[2].y;
-  frogSize = leaves[2].d;
+  frogSize = leaves[2].d * 0.6;
   frogFound = false;
 }
 

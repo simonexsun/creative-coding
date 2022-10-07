@@ -51,11 +51,14 @@ function draw() {
   });
 }
 
-function mouseReleased() {
-  makeNewRipple();
-  
-  let waterBloop = random(waterSounds);
-  waterBloop.play();
+function mousePressed(){
+  console.log('selected');
+  leaves.forEach((leaf) => {
+    if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
+      leaf.enlarge();
+    }
+  });
+  // leaf.reduct();
 }
 
 function mouseDragged(){
@@ -64,6 +67,19 @@ function mouseDragged(){
     if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
       leaf.x = mouseX;
       leaf.y = mouseY;
+    }
+  });
+}
+
+function mouseReleased() {
+  makeNewRipple();
+  
+  let waterBloop = random(waterSounds);
+  waterBloop.play();
+
+  leaves.forEach((leaf) => {
+    if(isMouseInside(leaf.x, leaf.y, leaf.d/2)){
+      leaf.reduct();
     }
   });
 }

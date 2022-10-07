@@ -1,4 +1,4 @@
-class Frog extends Leaf() {
+class Frog extends Leaf {
   constructor() {
     super();
   }

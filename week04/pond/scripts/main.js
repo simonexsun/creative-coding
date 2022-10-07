@@ -1,12 +1,31 @@
-let s;
-let waterColor, leafColor;
+let s; // scribble 
+let myFont;
+let waterSounds = [];
+let waterBloop1, waterBloop2, waterBloop3; // sound variables
+let waterColor, leafColor; // color variables
 let ripples = [];
-let leaves = [];
+let leaves = []; // object variables
+
+function preload(){
+  // preload audio
+  waterBloop1 = loadSound("./audios/water-bloop-1.mp3");
+  waterBloop2 = loadSound("./audios/water-bloop-2.mp3");
+  waterBloop3 = loadSound("./audios/water-bloop-3.mp3");
+
+  // preload font
+  // myFont = loadFont("fonts/PoiretOne-Regular.ttf");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   s = new Scribble();
 
+  //define sound
+  waterSounds.push(waterBloop1);
+  waterSounds.push(waterBloop2);
+  waterSounds.push(waterBloop3);
+
+  // define color
   waterColor = color(182, 201, 185);
   leafColor = color(90, 140, 127);
 
@@ -30,11 +49,13 @@ function draw() {
   leaves.forEach((leaf) => {
     leaf.display();
   });
-
 }
 
 function mouseReleased() {
   makeNewRipple();
+  
+  let waterBloop = random(waterSounds);
+  waterBloop.play();
 }
 
 function mouseDragged(){

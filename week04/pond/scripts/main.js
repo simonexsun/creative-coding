@@ -161,6 +161,9 @@ function displayUI() {
   let line_space = small_font_size * 1.2;
 
   fill(255);
+  stroke(255);
+  strokeWeight(0.5);
+
   textFont(myFont);
   textAlign(CENTER, TOP);
 
@@ -173,12 +176,12 @@ function displayUI() {
   stroke(255);
   strokeWeight(2);
   noFill();
-  rectMode(CENTER);
+  rectMode(TOP);
   // s.scribbleFilling(width / 2, height * 0.13, 5, 20);
   s.scribbleRect(
     width / 2,
     height * 0.13,
     width / 3,
-    small_font_size + big_font_size + line_space
+    small_font_size + big_font_size + margine
   );
 }

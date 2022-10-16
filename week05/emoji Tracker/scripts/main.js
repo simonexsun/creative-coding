@@ -7,26 +7,25 @@
 
 // log all tweets contsins the emoji
 // emoji by codepoint https://emojipedia.org/emoji/
-const endpoint = "https://stream.emojitracker.com/subscribe/eps";
-const evtSource = new EventSource(endpoint);
-let sob = 0;
+const EPSendpoint = "https://stream.emojitracker.com/subscribe/eps";
+const detailEndpoint = "https://stream.emojitracker.com/subscribe/1F62D";
+const EPSevtSource = new EventSource(EPSendpoint);
+const detailEvtSource = new EventSource(detailEndpoint);
+// let messageCounter = 0;
 
 // get DOM
-const eventList = document.querySelector("ul");
+// const eventList = document.querySelector("ul");
 
-evtSource.onmessage = (e) => {
-  // parse json
-  let response = JSON.parse(e.data);
-  // do something
-  for (const key in response) {
-    if (Object.hasOwnProperty.call(response, "1F62D")) {
-      sob++;
-    }
-  }
-
-  // console.log(response.1F602);
-  // console.log(e.data);
-};
+// EPSendpoint.onmessage = (e) => {
+//   // parse json
+//   let response = JSON.parse(e.data);
+//   // do something
+//   for (const key in response) {
+//     if (Object.hasOwnProperty.call(response, "1F62D")) {
+//       messageCounter++;
+//     }
+//   }
+// };
 
 // evtSource.addEventListener("message", (e) => {
 //   // const newElement = document.createElement("li");
@@ -44,6 +43,6 @@ function setup() {
 }
 function draw() {
   // console.log(element);
-  rectMode(LEFT);
-  rect(0, 15, sob / 10, 15);
+  // rectMode(LEFT);
+  // rect(0, 15, messageCounter / 10, 15);
 }

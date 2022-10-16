@@ -1,31 +1,16 @@
-// this app uses emojiTracker STREAM API.
+// this app uses emojiTracker STREAM API: https://github.com/emojitracker/emojitrack-streamer-spec/blob/master/README.md
 // Unlike the REST API, it constantly receives events as long as the connection is open
 // So instead of doing fetch(), I'm using EventSource.onmessage
 // for more about SSE (server-sent events), visit https://developer.mozilla.org/en-US/docs/Web/API/EventSource
 
-// Emojitracker Streaming API: https://github.com/emojitracker/emojitrack-streamer-spec/blob/master/README.md
-
-// log all tweets contsins the emoji
-// (emoji by codepoint https://emojipedia.org/emoji/)
-const detailEndpoint =
-  "https://stream.emojitracker.com/subscribe/details/1F494";
-// const EPSevtSource = new EventSource(EPSendpoint);
-
+let detailEvtSource;
 let messageList = [];
 
 function setup() {
   let cnv = createCanvas(windowWidth * 0.8, windowHeight * 0.8);
   cnv.position(windowWidth * 0.1, windowHeight * 0.2);
 
-  // connect to STREAM API
-  const detailEvtSource = new EventSource(detailEndpoint);
-
-  // receive data, creat Message object, and push to the end of the messageList
-  detailEvtSource.addEventListener("stream.tweet_updates.1F494", (e) => {
-    const response = JSON.parse(e.data);
-    const msg = new Message(response.screen_name, response.text);
-    messageList.push(msg);
-  });
+  updateEvtSource();
 }
 
 function draw() {
@@ -40,6 +25,31 @@ function draw() {
   messageList.forEach((message) => {
     message.fade();
     message.display();
+  });
+}
+
+function updateEvtSource() {
+  // get DOM select valuse, and pass it to endpoint URL
+  emojiID = document.getElementById("emoji").value;
+  detailEndpoint =
+    "https://stream.emojitracker.com/subscribe/details/" + emojiID;
+
+  // close connection of event source
+  if (detailEvtSource) {
+    detailEvtSource.close();
+    console.log("closed");
+  }
+
+  // clear existing messages
+  messageList = [];
+
+  // connect to STREAM API
+  detailEvtSource = new EventSource(detailEndpoint);
+  // receive data, creat Message object, and push to the end of the messageList
+  detailEvtSource.addEventListener(`stream.tweet_updates.${emojiID}`, (e) => {
+    const response = JSON.parse(e.data);
+    const msg = new Message(response.screen_name, response.text);
+    messageList.push(msg);
   });
 }
 
@@ -64,7 +74,7 @@ class Message {
 
   fade() {
     if (this.opacity > 0) {
-      this.opacity -= 0.5;
+      this.opacity -= messageList.length * 0.1;
     }
   }
 }

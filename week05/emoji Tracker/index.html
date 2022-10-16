@@ -13,11 +13,14 @@
 
     <!-- add libraries -->
     <script type="text/javascript" src="./libraries/p5.min.js"></script>
-
-    <!-- add scripts -->
-    <script type="text/javascript" src="./scripts/main.js"></script>
   </head>
   <body>
-    <ul></ul>
+    <select id="emoji" multiple onchange="updateEvtSource()">
+      <option selected="selected" value="1F494">💔</option>
+      <option value="1F525">🔥</option>
+    </select>
+
+    <!-- add p5 scripts -->
+    <script type="text/javascript" src="./scripts/main.js"></script>
   </body>
 </html>

@@ -8,9 +8,9 @@
 // log all tweets contsins the emoji
 // emoji by codepoint https://emojipedia.org/emoji/
 const EPSendpoint = "https://stream.emojitracker.com/subscribe/eps";
-const detailEndpoint = "https://stream.emojitracker.com/subscribe/1F62D";
+const detailEndpoint =
+  "https://stream.emojitracker.com/subscribe/details/1F62D";
 // const EPSevtSource = new EventSource(EPSendpoint);
-// const detailEvtSource = new EventSource(detailEndpoint);
 // let messageCounter = 0;
 
 // get DOM
@@ -64,6 +64,15 @@ function setup() {
       "re anyone who loves or pursues  used in the graphic, print, and."
     ),
   ];
+
+  // connect to STREAM API
+  const detailEvtSource = new EventSource(detailEndpoint);
+
+  detailEvtSource.addEventListener("stream.tweet_updates.1F62D", (e) => {
+    const response = JSON.parse(e.data);
+    const msg = new Message(response.screen_name, response.text);
+    messageList.push(msg);
+  });
 }
 
 function draw() {

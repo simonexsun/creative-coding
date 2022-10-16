@@ -9,8 +9,8 @@
 // emoji by codepoint https://emojipedia.org/emoji/
 const EPSendpoint = "https://stream.emojitracker.com/subscribe/eps";
 const detailEndpoint = "https://stream.emojitracker.com/subscribe/1F62D";
-const EPSevtSource = new EventSource(EPSendpoint);
-const detailEvtSource = new EventSource(detailEndpoint);
+// const EPSevtSource = new EventSource(EPSendpoint);
+// const detailEvtSource = new EventSource(detailEndpoint);
 // let messageCounter = 0;
 
 // get DOM
@@ -41,8 +41,4 @@ function setup() {
   cnv.position(windowWidth * 0.1, windowHeight * 0.2);
   background("black");
 }
-function draw() {
-  // console.log(element);
-  // rectMode(LEFT);
-  // rect(0, 15, messageCounter / 10, 15);
-}
+function draw() {}

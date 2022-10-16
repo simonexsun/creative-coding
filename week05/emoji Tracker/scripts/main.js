@@ -68,6 +68,7 @@ class Message {
 
   display() {
     textSize(15);
+    textFont("Orbitron");
     fill(255, 251, 171, this.opacity); // bright yellow
     text(this.formattedText(), 0, this.y, width);
   }

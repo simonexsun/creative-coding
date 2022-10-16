@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>p5 sketch</title>
+    <title>Cyberpunk Emoji Tracker</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 
@@ -15,8 +15,25 @@
     <script type="text/javascript" src="./libraries/p5.min.js"></script>
   </head>
   <body>
+    <header>
+      <div>
+        <span class="left" id="source">
+          <a href="https://github.com/emojitracker/emojitrack-streamer-spec">
+            emojitracker STREAM API</a
+          >: <br />tracks tweets with emojis on twitter.com
+        </span>
+        <span class="right" id="date">2020/10/16</span>
+      </div>
+      <div class="center" id="title">
+        <span style="background-color: black; padding: 0 15px"
+          ><span style="font-weight: 800; font-style: italic">Cyberpunk</span>
+          Emoji Tracker</span
+        >
+      </div>
+      <hr class="header_border" />
+    </header>
     <select id="emoji" multiple onchange="updateEvtSource()">
-      <option selected="selected" value="1F494">💔</option>
+      <option value="1F494">💔</option>
       <option value="1F525">🔥</option>
     </select>
 

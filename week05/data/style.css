@@ -2,7 +2,6 @@
 
 *{
 	padding: 0;
-	overflow: hidden;
 }
 
 body {
@@ -61,34 +60,53 @@ header {
 	font-size: small;
 }
 
-.selection {
+.scroll_box {
+	/* width: 20px; */
+	margin: 8% 2% auto 2%; 
+	/* (top righ bottom left) */
 	position: absolute;
 	height: 70%;
-	overflow: hidden;
-	background-color: black;
+	width:10%;
+}
+
+select {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-size: 90px;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	overflow: wrap;
+}
+
+select:focus {
+	background-color: transparent;
 }
 
 option {
+	overflow: hidden;
 	background-color: black;
+	margin: 0 10px 10px 10px;
 }
 
-.scrollbar::-webkit-scrollbar {
-	width: 5px;
-	height: 20px;
-	background-color: #aaa;
-	/* or add it to the track */
+option:hover {
+	background-color: rgb(100, 0, 0, 0.5);
 }
 
-/* Add a thumb */
-.scrollbar::-webkit-scrollbar-thumb {
-	background:red;
+option:checked
+option:focus
+{
+	background-color: rgb(33, 0, 0);
+	border-color: rgb(255, 248, 119);
 }
 
 #message_group {
 	position: absolute;
 	margin: 5% 2%;
 	right: 0;
-	width: 60%;
+	width: 80%;
 	color:rgb(255, 251, 171, 0.5);
 }
 
@@ -103,16 +121,16 @@ svg {
 }
 
 #myCanvas {
-	/* position: absolute; */
+	overflow: hidden;
 	margin: 0 0;
 	right:0;
 	/* width: 60%; */
 	border: 1px solid rgb(255,251,171, 0.5);
 	box-shadow:
 		0 0 10px 0.1px rgb(255, 251, 171, 0.5),
-		/* x offset, y offset, blur size, spread size, color */
+		/* (x offset, y offset, blur size, spread size, color) */
 		inset 1px 0 10px rgb(255, 251, 171, 0.5);
-		/* mode, x offset, y offset, blur size color */
+		/* (mode, x offset, y offset, blur size color) */
 }
 
 .glow {

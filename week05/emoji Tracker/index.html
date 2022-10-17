@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- add libraries -->
-    <script type="text/javascript" src="./libraries/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.js"></script>
   </head>
   <body>
     <header>
@@ -24,19 +24,37 @@
         </span>
         <span class="right" id="date">2020/10/16</span>
       </div>
-      <div class="center" id="title">
-        <span style="background-color: black; padding: 0 15px"
+      <div class="center glow" id="title">
+        <span style="background-color: rgb(33, 0, 0); padding: 0 15px"
           ><span style="font-weight: 800; font-style: italic">Cyberpunk</span>
           Emoji Tracker</span
         >
       </div>
       <hr class="header_border" />
     </header>
-    <select id="emoji" multiple onchange="updateEvtSource()">
-      <option value="1F494">💔</option>
-      <option value="1F525">🔥</option>
-    </select>
-
+    <div class="scrollbar selection">
+      <select id="emoji" multiple onchange="updateEvtSource()">
+        <option value="1F494">💔</option>
+        <option value="1F525">🔥</option>
+      </select>
+    </div>
+    <div id="message_group">
+      <svg
+        width="130px"
+        height="30px"
+        viewbox="0 0 130 30"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,30 L0,1 L120,1 L130,30 L0,30"
+          stroke="rgb(255, 251, 17, 0.5)"
+          stroke-width="1"
+          fill="black"
+        />
+      </svg>
+      <div class="left" id="message_title">MESSAGES</div>
+      <div id="myCanvas"></div>
+    </div>
     <!-- add p5 scripts -->
     <script type="text/javascript" src="./scripts/main.js"></script>
   </body>

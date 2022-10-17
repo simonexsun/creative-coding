@@ -8,7 +8,7 @@
 body {
 	margin: 1% 2%;
 	font-family: 'Orbitron', sans-serif;
-	background-color: black;
+	background-color: rgb(33, 0, 0);
 	color: red;
 }
 
@@ -19,6 +19,9 @@ a {
 
 hr.header_border{
 	border: 0.5px solid red;
+	height: 0.25px;
+	box-shadow:
+		0 0 5px 0.5px red;
 }
 
 header {
@@ -46,12 +49,84 @@ header {
 
 #title {
 	width: 100%;
+	/* height: 40px; */
+	padding: 20px 20px;
 	position: absolute;
-	top:5%;
+	top:4%;
 	font-size: 20px;
 	color: rgb(31,225,255);
 }
 
 #date {
 	font-size: small;
+}
+
+.selection {
+	position: absolute;
+	height: 70%;
+	overflow: hidden;
+	background-color: black;
+}
+
+option {
+	background-color: black;
+}
+
+.scrollbar::-webkit-scrollbar {
+	width: 5px;
+	height: 20px;
+	background-color: #aaa;
+	/* or add it to the track */
+}
+
+/* Add a thumb */
+.scrollbar::-webkit-scrollbar-thumb {
+	background:red;
+}
+
+#message_group {
+	position: absolute;
+	margin: 5% 2%;
+	right: 0;
+	width: 60%;
+	color:rgb(255, 251, 171, 0.5);
+}
+
+#message_title {
+	position: absolute;
+	top: 5px;
+	padding: 0 5px;
+}
+
+svg {
+	filter: drop-shadow(0 0 10px rgb(255, 251, 17, 0.5));
+}
+
+#myCanvas {
+	/* position: absolute; */
+	margin: 0 0;
+	right:0;
+	/* width: 60%; */
+	border: 1px solid rgb(255,251,171, 0.5);
+	box-shadow:
+		0 0 10px 0.1px rgb(255, 251, 171, 0.5),
+		/* x offset, y offset, blur size, spread size, color */
+		inset 1px 0 10px rgb(255, 251, 171, 0.5);
+		/* mode, x offset, y offset, blur size color */
+}
+
+.glow {
+	animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+	from {
+		text-shadow: 
+			0 0 3px rgb(31, 225, 255);
+	}
+
+	to {
+		text-shadow: 
+			0 0 40px rgb(31, 225, 255);
+	}
 }

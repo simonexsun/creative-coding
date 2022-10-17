@@ -7,14 +7,23 @@ let detailEvtSource;
 let messageList = [];
 
 function setup() {
-  let cnv = createCanvas(windowWidth * 0.8, windowHeight * 0.8);
-  cnv.position(windowWidth * 0.1, windowHeight * 0.2);
+  let cnv = createCanvas(windowWidth, windowHeight * 0.7);
+  // generate canvas in element with id "myCanvas"
+  cnv.parent("myCanvas");
+  // canvas inner glow
+  drawingContext.shadowOffsetX = 0;
+  drawingContext.shadowOffsetY = 0;
+  drawingContext.shadowBlur = 7;
+  drawingContext.shadowColor = color(255, 251, 171);
 
   updateEvtSource();
 }
 
 function draw() {
-  background("black");
+  background(0, 0, 0);
+  // canvas inner glow
+  fill(0, 0, 0, 0);
+  rect(0, 0, width, height);
 
   // remove objects that aren't visible from the messageList
   while (messageList.length > 0 && messageList[0].opacity <= 0) {
@@ -59,7 +68,7 @@ class Message {
     this.author = author;
 
     this.opacity = 100;
-    this.y = random(height);
+    this.y = random(height * 0.02, height * 0.8);
   }
 
   formattedText() {
@@ -70,7 +79,7 @@ class Message {
     textSize(15);
     textFont("Orbitron");
     fill(255, 251, 171, this.opacity); // bright yellow
-    text(this.formattedText(), 0, this.y, width);
+    text(this.formattedText(), width * 0.02, this.y, width);
   }
 
   fade() {

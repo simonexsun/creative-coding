@@ -16,7 +16,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(325, 325, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
   // loop audio
   song.loop();

@@ -1,14 +1,16 @@
 class Ball {
-  constructor() {
+  constructor(t) {
     this.x = random(width / 2);
     this.y = random(height / 2);
     this.d = random(5, 15);
     this.colorGold = color(215, 190, 105);
     this.theta = random(-TWO_PI, TWO_PI);
+    this.intensity = t;
   }
 
   circle(vol) {
     this.d = 25;
+    push();
     noStroke();
     fill(this.colorGold);
 
@@ -25,11 +27,11 @@ class Ball {
     this.y += dy * easing;
   }
 
-  bounce() {
+  bounce(input) {
     // inspired by N1U on dribble https://dribbble.com/shots/11429742-Defend-the-Cube
     stroke(this.colorGold);
     strokeWeight(1);
-    let speed = 1;
+    let intensity = map(input, 180, 380, 2, 0.05);
 
     // method 1, spin full circle, but effect other movements
     // rotate(frameCount * 0.01);
@@ -41,13 +43,15 @@ class Ball {
 
     // method 3, bounce independently
     this.x = 0;
-    this.y += sin(millis() * 0.001) * speed;
+    this.y += sin(millis() * 0.001) * intensity;
+    push();
     rotate(this.theta);
   }
 
   amplify(vol) {
     this.x = 0;
     this.y = 0;
+    push();
     noFill();
     strokeWeight(7);
     stroke(this.colorGold);
@@ -66,5 +70,6 @@ class Ball {
 
   display() {
     circle(this.x, this.y, this.d);
+    pop();
   }
 }

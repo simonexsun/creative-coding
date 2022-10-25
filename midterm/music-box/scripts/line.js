@@ -19,10 +19,10 @@ class LineGroup {
     strokeWeight(0.5);
     stroke(this.colorGold);
     for (let i = 0; i < this.n; i++) {
-      // push();
+      push();
       rotate(radians((360 / this.n) * i));
       line(0, this.offset + this.l, 0, this.offset);
-      // pop();
+      pop();
     }
   }
 }

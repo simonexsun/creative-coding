@@ -1,6 +1,6 @@
 class Box {
   constructor() {
-    this.edge = random(width / 4, width / 2);
+    this.edge = random(150, 150);
     this.colorGold = color(215, 190, 105);
   }
 

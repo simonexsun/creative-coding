@@ -4,6 +4,7 @@
 
 let song, amp;
 let circlingBall, ampBall, lines, mybox;
+let bouncingBallUI;
 let bouncingBalls = [];
 
 let myFont;
@@ -16,13 +17,11 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(325, 325, WEBGL);
-
+  createCanvas(windowWidth, windowHeight, WEBGL);
   // loop audio
   song.loop();
   amp = new p5.Amplitude();
-
-  //Create objects
+  // Create objects
   for (let i = 0; i < 10; i++) {
     bouncingBalls.push(new Ball());
   }
@@ -30,6 +29,8 @@ function setup() {
   ampBall = new Ball();
   myBox = new Box();
   lines = new LineGroup(40, 200);
+  // Create UI
+  bouncingBallUI = new BouncingBallUI(width / 6, height / 3, 15, height / 4);
 }
 
 function draw() {
@@ -48,9 +49,13 @@ function draw() {
 
   let vol = amp.getLevel();
 
+  // operate UI methods
+  bouncingBallUI.interact();
+  bouncingBallUI.display();
+
   // operate object methods
   bouncingBalls.forEach((ball) => {
-    ball.bounce();
+    ball.bounce(bouncingBallUI.ellipseY);
     ball.display();
   });
   circlingBall.circle(vol);

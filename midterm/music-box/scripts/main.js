@@ -4,7 +4,7 @@
 
 let song, amp;
 let circlingBall, ampBall, lines, mybox;
-let bouncingBallUI;
+let bouncingBallUI, lineUI;
 let bouncingBalls = [];
 
 let myFont;
@@ -30,7 +30,8 @@ function setup() {
   myBox = new Box();
   lines = new LineGroup(40, 200);
   // Create UI
-  bouncingBallUI = new BouncingBallUI(width / 6, height / 3, 15, height / 4);
+  bouncingBallUI = new BouncingBallUI(width / 6, height / 3, 15, height / 5);
+  lineUI = new LineUI(width / 6, (height * 2) / 3, 15, height / 5);
 }
 
 function draw() {
@@ -52,6 +53,8 @@ function draw() {
   // operate UI methods
   bouncingBallUI.interact();
   bouncingBallUI.display();
+  lineUI.interact();
+  lineUI.display();
 
   // operate object methods
   bouncingBalls.forEach((ball) => {
@@ -63,7 +66,7 @@ function draw() {
   ampBall.amplify(vol);
   ampBall.display();
   myBox.display();
-  lines.amplify(vol);
+  lines.amplify(vol, lineUI.lineY);
   lines.display();
 }
 

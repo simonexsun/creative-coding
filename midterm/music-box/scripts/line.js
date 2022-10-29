@@ -8,8 +8,8 @@ class LineGroup {
     this.colorGold = color(215, 190, 105);
   }
 
-  amplify(vol) {
-    let intensity = 120;
+  amplify(vol, input) {
+    let intensity = map(input, 456, 596, 300, 5);
     this.offset = vol * intensity;
     // this.l = vol * intensity;
   }

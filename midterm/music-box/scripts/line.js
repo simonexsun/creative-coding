@@ -5,7 +5,7 @@ class LineGroup {
     this.l = length; // single line length
     this.offset = 1;
     this.n = number; // number of bars
-    this.colorGold = color(215, 190, 105);
+    this.color = color(235, 131, 131); //red
   }
 
   amplify(vol, input) {
@@ -17,7 +17,7 @@ class LineGroup {
   display() {
     noFill();
     strokeWeight(0.5);
-    stroke(this.colorGold);
+    stroke(this.color);
     for (let i = 0; i < this.n; i++) {
       push();
       rotate(radians((360 / this.n) * i));

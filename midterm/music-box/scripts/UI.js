@@ -64,7 +64,7 @@ class LineUI extends UI {
   constructor(x, y, w, h) {
     super(x, y, w, h);
     this.lineY = y;
-    this.color = color(235, 131, 131);
+    this.color = color(235, 131, 131); // red
   }
 
   interact() {

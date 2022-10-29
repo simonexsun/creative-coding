@@ -1,14 +1,19 @@
-class BouncingBallUI {
+class UI {
   constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.ellipseY = y;
-    this.thickness = 0.5;
     this.colorGold = color(215, 190, 105);
   }
+}
 
+class BouncingBallUI extends UI {
+  constructor(x, y, w, h) {
+    super(x, y, w, h);
+    this.ellipseY = y;
+    this.thickness = 0.5;
+  }
   interact() {
     push();
     // shift canvas

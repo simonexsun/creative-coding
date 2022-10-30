@@ -53,12 +53,6 @@ class Ball {
 
     let intensity = 300;
 
-    // amplify with easing
-    // let easing = 0.5;
-    // let targetD = intensity * vol;
-    // let dd = targetD - this.d;
-    // this.d = dd * easing;
-
     // without easing
     this.d = vol * intensity;
   }

@@ -75,6 +75,7 @@ class LineUI extends UI {
     this.lineY = y;
     this.color = color(235, 131, 131); // red
   }
+
   mousePressAction() {
     // change line length based on mouse positions
     this.lineY = mouseY;
@@ -84,7 +85,6 @@ class LineUI extends UI {
     push();
     // shift canvas
     translate(-width / 2, -height / 2);
-
     // display line
     noFill();
     strokeWeight(this.thickness);

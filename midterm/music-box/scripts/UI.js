@@ -6,14 +6,6 @@ class UI {
     this.h = h;
     this.thickness = 0.5;
   }
-}
-
-class BouncingBallUI extends UI {
-  constructor(x, y, w, h) {
-    super(x, y, w, h);
-    this.ellipseY = y;
-    this.color = color(215, 190, 105);
-  }
 
   interact() {
     push();
@@ -30,8 +22,8 @@ class BouncingBallUI extends UI {
       if (mouseIsPressed) {
         // thicken ellipse stroke
         this.thickness = 3;
-        // move ellipse based on mouse positions
-        this.ellipseY = mouseY;
+        // mouse press action (to be overridden)
+        this.mousePressAction();
       } else {
         // reverse ellipse stroke
         this.thickness = 0.5;
@@ -41,6 +33,23 @@ class BouncingBallUI extends UI {
       this.thickness = 0.5;
     }
     pop();
+  }
+
+  mousePressAction() {
+    console.log("ERR: parent class mousePressAction called");
+  }
+}
+
+class BouncingBallUI extends UI {
+  constructor(x, y, w, h) {
+    super(x, y, w, h);
+    this.ellipseY = y;
+    this.color = color(215, 190, 105);
+  }
+
+  mousePressAction() {
+    // move ellipse based on mouse positions
+    this.ellipseY = mouseY;
   }
 
   display() {
@@ -66,33 +75,9 @@ class LineUI extends UI {
     this.lineY = y;
     this.color = color(235, 131, 131); // red
   }
-
-  interact() {
-    push();
-    // shift canvas
-    translate(-width / 2, -height / 2);
-
-    if (dist(mouseX, mouseY, this.x, this.y) <= this.h / 2 - this.w / 2) {
-      // highlight on hover
-      fill(255, 255, 255, 15);
-      noStroke();
-      ellipse(this.x, this.y, this.h);
-
-      // interaction on mouse pressed
-      if (mouseIsPressed) {
-        // thicken ellipse stroke
-        this.thickness = 3;
-        // move ellipse based on mouse positions
-        this.lineY = mouseY;
-      } else {
-        // reverse ellipse stroke
-        this.thickness = 0.5;
-      }
-    } else {
-      // reverse ellipse stroke
-      this.thickness = 0.5;
-    }
-    pop();
+  mousePressAction() {
+    // change line length based on mouse positions
+    this.lineY = mouseY;
   }
 
   display() {

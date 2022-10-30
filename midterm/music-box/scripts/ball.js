@@ -34,7 +34,7 @@ class Ball {
     this.color = color(215, 190, 105); // golden
     stroke(this.color);
     strokeWeight(1);
-    let intensity = map(input, 180, 380, 2, 0.05);
+    let intensity = map(input, 180, 380, 2, 0.001);
 
     // method 1, spin full circle, but effect other movements
     // rotate(frameCount * 0.01);

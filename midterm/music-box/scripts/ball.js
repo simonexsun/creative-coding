@@ -43,15 +43,16 @@ class Ball {
     rotate(this.theta);
   }
 
-  amplify(vol) {
+  amplify(vol, input) {
     this.x = 0;
     this.y = 0;
+    this.color = color(165, 255, 41); // green
     push();
     noFill();
     strokeWeight(7);
     stroke(this.color);
 
-    let intensity = 300;
+    let intensity = map(input, 216, 331, 250, 0.1);
 
     // without easing
     this.d = vol * intensity;

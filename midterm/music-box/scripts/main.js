@@ -63,7 +63,6 @@ function draw() {
   lineUI.display();
   circlingBallUI.interact();
   circlingBallUI.display();
-  console.log(circlingBallUI.ellipseY);
 
   // operate object methods
   lines.amplify(vol, lineUI.lineY);
@@ -74,7 +73,7 @@ function draw() {
   });
   circlingBall.circle(vol, circlingBallUI.ellipseY);
   circlingBall.display();
-  ampBall.amplify(vol);
+  ampBall.amplify(vol, circlingBallUI.ellipseY);
   ampBall.display();
   myBox.display();
 }

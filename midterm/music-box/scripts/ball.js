@@ -36,15 +36,7 @@ class Ball {
     strokeWeight(1);
     let intensity = map(input, 180, 380, 2, 0.001);
 
-    // method 1, spin full circle, but effect other movements
-    // rotate(frameCount * 0.01);
-
-    //method 2, spin full circle in tan()/cos(), but doesn't bounce, and effect other movements
-    // rotate(-HALF_PI);
-    // rotate(cos(millis()*0.001)*speed);
-    // translate(0, sin(millis()* 0.001)*intensity);
-
-    // method 3, bounce independently
+    // bounce independently
     this.x = 0;
     this.y += sin(millis() * 0.001) * intensity;
     push();

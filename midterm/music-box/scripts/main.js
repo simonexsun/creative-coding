@@ -66,6 +66,8 @@ function draw() {
   console.log(circlingBallUI.ellipseY);
 
   // operate object methods
+  lines.amplify(vol, lineUI.lineY);
+  lines.display();
   bouncingBalls.forEach((ball) => {
     ball.bounce(bouncingBallUI.ellipseY);
     ball.display();
@@ -75,8 +77,6 @@ function draw() {
   ampBall.amplify(vol);
   ampBall.display();
   myBox.display();
-  lines.amplify(vol, lineUI.lineY);
-  lines.display();
 }
 
 // Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes

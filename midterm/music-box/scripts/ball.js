@@ -3,16 +3,18 @@ class Ball {
     this.x = random(width / 2);
     this.y = random(height / 2);
     this.d = random(5, 15);
-    this.colorGold = color(215, 190, 105);
+    this.color = color(215, 190, 105); // defult golden
     this.theta = random(-TWO_PI, TWO_PI);
     this.intensity = t;
   }
 
   circle(vol, input) {
     this.d = 25;
+    this.color = color(165, 255, 41); // green
+
     push();
     noStroke();
-    fill(this.colorGold);
+    fill(this.color);
 
     // smoothen the movement
     let easing = 0.5;
@@ -29,7 +31,8 @@ class Ball {
 
   bounce(input) {
     // inspired by N1U on dribble https://dribbble.com/shots/11429742-Defend-the-Cube
-    stroke(this.colorGold);
+    this.color = color(215, 190, 105); // golden
+    stroke(this.color);
     strokeWeight(1);
     let intensity = map(input, 180, 380, 2, 0.05);
 
@@ -54,7 +57,7 @@ class Ball {
     push();
     noFill();
     strokeWeight(7);
-    stroke(this.colorGold);
+    stroke(this.color);
 
     let intensity = 300;
 

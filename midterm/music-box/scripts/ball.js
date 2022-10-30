@@ -8,7 +8,7 @@ class Ball {
     this.intensity = t;
   }
 
-  circle(vol) {
+  circle(vol, input) {
     this.d = 25;
     push();
     noStroke();
@@ -16,7 +16,7 @@ class Ball {
 
     // smoothen the movement
     let easing = 0.5;
-    let intensity = 250;
+    let intensity = map(input, 216, 331, 250, 0.1);
 
     let targetX = intensity * vol * sin(millis() * 0.001);
     let dx = targetX - this.x;

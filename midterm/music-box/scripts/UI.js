@@ -17,7 +17,6 @@ class UI {
       fill(255, 255, 255, 15);
       noStroke();
       ellipse(this.x, this.y, this.h);
-
       // interaction on mouse pressed
       if (mouseIsPressed) {
         // thicken ellipse stroke
@@ -110,6 +109,56 @@ class LineUI extends UI {
     arc(this.x, this.y - (this.h / 2 - this.w / 2), this.w, this.w, PI, TWO_PI);
     // bottom arc
     arc(this.x, this.y + (this.h / 2 - this.w / 2), this.w, this.w, TWO_PI, PI);
+    pop();
+  }
+}
+
+class CirclingBallUI extends UI {
+  constructor(x, y, R, r) {
+    const w = 0;
+    const h = (R + r) * 2;
+    super(x, y, w, h);
+
+    this.R = R;
+    this.r = r;
+    this.ellipseX = x + R + r;
+    this.ellipseY = y;
+    this.color = color(169, 215, 105); // green
+  }
+
+  mousePressAction() {
+    // move ellipse based on mouse positions
+    this.ellipseX = this.x + sqrt(sq(this.R + this.r) - sq(this.y - mouseY));
+    this.ellipseY = mouseY;
+  }
+
+  display() {
+    push();
+    // shift canvas
+    translate(-width / 2, -height / 2);
+
+    // display ellipse
+    noFill();
+    strokeWeight(this.thickness);
+    stroke(this.color);
+    ellipse(this.ellipseX, this.ellipseY, this.r * 2);
+    // display indicator
+    line(
+      this.x - this.r,
+      this.ellipseY + this.r / 2,
+      this.x + this.r,
+      this.ellipseY + this.r / 2
+    );
+    line(
+      this.x - this.r,
+      this.ellipseY - this.r / 2,
+      this.x + this.r,
+      this.ellipseY - this.r / 2
+    );
+
+    // display track
+    strokeWeight(0.5);
+    ellipse(this.x, this.y, this.R * 2);
     pop();
   }
 }

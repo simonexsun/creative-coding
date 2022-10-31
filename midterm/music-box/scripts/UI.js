@@ -138,11 +138,12 @@ class CirclingBallUI extends UI {
     translate(-width / 2, -height / 2);
 
     // display ellipse
-    noFill();
+    fill(this.color);
     strokeWeight(this.thickness);
     stroke(this.color);
     ellipse(this.ellipseX, this.ellipseY, this.r * 2);
     // display indicator
+    noFill();
     line(
       this.x - this.r,
       this.ellipseY + this.r / 2,

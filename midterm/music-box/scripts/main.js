@@ -70,12 +70,12 @@ function draw() {
   fill("white");
   textAlign(CENTER, BOTTOM);
   if (!isPlaying) {
-    text("click to open music box", -width / 2, height * 0.4, width);
+    text("click here to open music box", -width / 2, height * 0.4, width);
     pop();
 
     hideUI();
   } else {
-    text("click to close music box", -width / 2, height * 0.4, width);
+    text("click here to close music box", -width / 2, height * 0.4, width);
     pop();
 
     showUI();

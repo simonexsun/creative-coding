@@ -121,8 +121,10 @@ class CirclingBallUI extends UI {
 
     this.R = R;
     this.r = r;
-    this.ellipseX = x + R + r;
-    this.ellipseY = y;
+    this.ellipseY = y + R * 0.8;
+    // this.ellipseX = x + R + r;
+    this.ellipseX =
+      this.x + sqrt(sq(this.R + this.r) - sq(this.y - this.ellipseY));
     this.color = color(169, 215, 105); // green
   }
 

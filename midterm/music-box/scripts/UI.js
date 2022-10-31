@@ -171,19 +171,19 @@ class BoxUI extends UI {
     const h = boxWidth * 1.5;
     super(x, y, w, h);
     this.theta = radians(30);
-    this.movement = 0;
     this.r = r; // indicator line length
+    this.movement = (this.h / 2 - this.r) * 0.8;
     this.color = color(105, 204, 215); // blue
   }
 
   mousePressAction() {
     // enlarge or smallen ellipse based on mouse positions
-    this.theta = radians(map(mouseY, 473, 623, 60, 0));
+    this.theta = radians(map(mouseY, 502, 628, 60, 0));
     // move indicator up or down based on mouse positions
     this.movement = map(
       mouseY,
-      473,
-      623,
+      this.y - this.h / 2,
+      this.y + this.h / 2,
       -this.h / 2 + this.r,
       this.h / 2 - this.r
     );

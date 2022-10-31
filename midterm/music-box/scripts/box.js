@@ -5,7 +5,7 @@ class Box {
   }
 
   display(input) {
-    let intensity = map(input, -70, 70, 0.01, 0);
+    let intensity = map(input, -55, 55, 0.05, 0);
     noFill();
     strokeWeight(0.5);
     stroke(this.color);

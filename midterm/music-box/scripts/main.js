@@ -80,11 +80,15 @@ function draw() {
   ambient.amp(map(lineUI.lineY, 473, 620, 1.5, 0));
   drums.amp(map(circlingBallUI.ellipseY, 216, 331, 1, 0));
   tune.amp(map(bouncingBallUI.ellipseY, 239, 328, 1, 0));
+  passage.amp(
+    map(boxUI.movement, -boxUI.h / 2 + boxUI.r, boxUI.h / 2 - boxUI.r, 1, 0)
+  );
 
   // get indivisual sound track volumn
   let ambientVol = ambientAmp.getLevel();
   let drumsVol = drumsAmp.getLevel();
   let tuneVol = tuneAmp.getLevel();
+  let passageVol = passageAmp.getLevel();
 
   // operate UI methods
   bouncingBallUI.interact(); // controls tune
@@ -93,7 +97,7 @@ function draw() {
   lineUI.display();
   circlingBallUI.interact(); // controls drums
   circlingBallUI.display();
-  boxUI.interact();
+  boxUI.interact(); // controls passage
   boxUI.display();
 
   // operate object methods
@@ -107,7 +111,7 @@ function draw() {
   circlingBall.display();
   ampBall.amplify(drumsVol, circlingBallUI.ellipseY); // drums
   ampBall.display();
-  myBox.display(boxUI.movement);
+  myBox.display(boxUI.movement); // passage
 }
 
 // Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes

@@ -66,16 +66,18 @@ function draw() {
   //display text
   push();
   textFont(myFont);
-  textSize(20);
   fill("white");
   textAlign(CENTER, BOTTOM);
+  textSize(18);
+  text("Music by Helios. Art by Simone", -width / 2, height * 0.4, width);
+  textSize(30);
   if (!isPlaying) {
-    text("click here to open music box", -width / 2, height * 0.4, width);
+    text("click here to open music box", -width / 2, height * 0.35, width);
     pop();
 
     hideUI();
   } else {
-    text("click here to close music box", -width / 2, height * 0.4, width);
+    text("click here to close music box", -width / 2, height * 0.35, width);
     pop();
 
     showUI();
@@ -112,7 +114,7 @@ function draw() {
 }
 
 function mousePressed() {
-  if (mouseY > height * 0.85) {
+  if (mouseY > height * 0.8) {
     isPlaying = !isPlaying;
     if (!isPlaying) {
       hideUI();

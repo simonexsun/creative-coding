@@ -10,7 +10,7 @@ class Ball {
 
   circle(vol, input) {
     this.d = 25;
-    this.color = color(165, 255, 41); // green
+    this.color = color(169, 215, 105); // green
 
     push();
     noStroke();
@@ -46,7 +46,7 @@ class Ball {
   amplify(vol, input) {
     this.x = 0;
     this.y = 0;
-    this.color = color(165, 255, 41); // green
+    this.color = color(169, 215, 105); // green
     push();
     noFill();
     strokeWeight(7);

@@ -2,7 +2,7 @@
 // easing tutorial from https://p5js.org/examples/input-easing.html
 // sound tracks from artist Helios, aquired from http://unseen-music.com/yume/loops/trimmed/
 
-let ambient, drums, tune, ambientAmp, drumsAmp, tuneAmp;
+let ambient, drums, tune, passage, ambientAmp, drumsAmp, tuneAmp, passageAmp;
 let circlingBall, ampBall, lines, mybox;
 let bouncingBallUI, lineUI, circlingBallUI, boxUI;
 let bouncingBalls = [];
@@ -14,6 +14,7 @@ function preload() {
   ambient = loadSound("audio/ambient01.mp3");
   drums = loadSound("audio/drums01.mp3");
   tune = loadSound("audio/tune01.mp3");
+  passage = loadSound("audio/passage01.mp3");
 
   // preload font
   myFont = loadFont("fonts/PoiretOne-Regular.ttf");
@@ -25,12 +26,16 @@ function setup() {
   ambient.loop();
   drums.loop();
   tune.loop();
+  passage.loop();
   ambientAmp = new p5.Amplitude(0.9); // smoothing = 0.9
   ambientAmp.setInput(ambient);
   drumsAmp = new p5.Amplitude(0.9);
   drumsAmp.setInput(drums);
   tuneAmp = new p5.Amplitude(0.9);
   tuneAmp.setInput(tune);
+  passageAmp = new p5.Amplitude(0.9);
+  passageAmp.setInput(passage);
+
   // Create objects
   for (let i = 0; i < 10; i++) {
     bouncingBalls.push(new Ball());
@@ -39,6 +44,7 @@ function setup() {
   ampBall = new Ball();
   myBox = new Box();
   lines = new LineGroup(40, 50);
+
   // Create UI
   bouncingBallUI = new BouncingBallUI(width / 6, height / 3, 15, height / 8);
   lineUI = new LineUI(width / 6, (height * 2) / 3, 15, height / 8);

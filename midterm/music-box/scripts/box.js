@@ -1,16 +1,17 @@
 class Box {
   constructor() {
     this.edge = random(150, 150);
-    this.colorGold = color(215, 190, 105);
+    this.color = color(105, 204, 215); // blue
   }
 
-  display() {
+  display(input) {
+    let intensity = map(input, -70, 70, 0.01, 0);
     noFill();
     strokeWeight(0.5);
-    stroke(this.colorGold);
+    stroke(this.color);
     push();
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
+    rotateX(frameCount * intensity);
+    rotateY(frameCount * intensity);
     box(this.edge);
     pop();
   }

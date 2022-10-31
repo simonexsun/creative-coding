@@ -162,3 +162,68 @@ class CirclingBallUI extends UI {
     pop();
   }
 }
+
+class BoxUI extends UI {
+  constructor(x, y, boxWidth, r) {
+    const w = 0;
+    const h = boxWidth * 1.5;
+    super(x, y, w, h);
+    this.theta = radians(30);
+    this.movement = 0;
+    this.r = r; // indicator line length
+    this.color = color(105, 204, 215); // blue
+  }
+
+  mousePressAction() {
+    // enlarge or smallen ellipse based on mouse positions
+    this.theta = radians(map(mouseY, 473, 623, 60, 0));
+    // move indicator up or down based on mouse positions
+    this.movement = map(
+      mouseY,
+      473,
+      623,
+      -this.h / 2 + this.r,
+      this.h / 2 - this.r
+    );
+  }
+
+  display() {
+    push();
+    // shift canvas
+    translate(-width / 2, -height / 2);
+    translate(this.x, this.y);
+    rotateX(radians(0));
+    rotateY(radians(-30));
+
+    // display box (static)
+    noFill();
+    strokeWeight(0.5);
+    stroke(this.color);
+    box(this.h / 4);
+
+    // display tracks around the box (animated)
+    strokeWeight(this.thickness);
+    let ellipseW = this.h;
+    // ellipse "\"
+    push();
+    rotateX(radians(80));
+    rotateY(this.theta);
+    ellipse(0, 0, ellipseW);
+    pop();
+    // ellipse "/"
+    push();
+    rotateX(radians(80));
+    rotateY(-this.theta);
+    ellipse(0, 0, ellipseW);
+    pop();
+
+    // display indicator (animated)
+    // undo rotation
+    rotateY(radians(30));
+    translate(0, this.movement);
+    line(-this.r, this.r / 2, this.r, this.r / 2);
+    line(-this.r, -this.r / 2, this.r, -this.r / 2);
+
+    pop();
+  }
+}

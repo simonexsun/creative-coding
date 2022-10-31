@@ -4,7 +4,7 @@
 
 let song, amp;
 let circlingBall, ampBall, lines, mybox;
-let bouncingBallUI, lineUI, circlingBallUI;
+let bouncingBallUI, lineUI, circlingBallUI, boxUI;
 let bouncingBalls = [];
 
 let myFont;
@@ -38,6 +38,7 @@ function setup() {
     height / 16, // track radius
     7 // ellipse radius
   );
+  boxUI = new BoxUI((width * 5) / 6, (height * 2) / 3, height / 8, 7);
 }
 
 function draw() {
@@ -63,6 +64,8 @@ function draw() {
   lineUI.display();
   circlingBallUI.interact();
   circlingBallUI.display();
+  boxUI.interact();
+  boxUI.display();
 
   // operate object methods
   lines.amplify(vol, lineUI.lineY);
@@ -75,7 +78,8 @@ function draw() {
   circlingBall.display();
   ampBall.amplify(vol, circlingBallUI.ellipseY);
   ampBall.display();
-  myBox.display();
+  myBox.display(boxUI.movement);
+  console.log(boxUI.movement);
 }
 
 // Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes

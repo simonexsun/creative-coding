@@ -6,6 +6,7 @@ let ambient, drums, tune, passage, ambientAmp, drumsAmp, tuneAmp, passageAmp;
 let circlingBall, ampBall, lines, mybox;
 let bouncingBallUI, lineUI, circlingBallUI, boxUI;
 let bouncingBalls = [];
+let isPlaying;
 
 let myFont;
 
@@ -22,11 +23,8 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  // loop audio
-  ambient.loop();
-  drums.loop();
-  tune.loop();
-  passage.loop();
+  // setup audio
+  isPlaying = false;
   ambientAmp = new p5.Amplitude(0.9); // smoothing = 0.9
   ambientAmp.setInput(ambient);
   drumsAmp = new p5.Amplitude(0.9);
@@ -66,15 +64,17 @@ function draw() {
   background(0);
 
   //display text if the music is not playing
-  if (getAudioContext().state == "suspended") {
-    push();
-    textFont(myFont);
-    textSize(20);
-    fill("white");
-    textAlign(CENTER, BOTTOM);
-    text("click anywhere to play music", -width / 2, height * 0.4, width);
-    pop();
+  push();
+  textFont(myFont);
+  textSize(20);
+  fill("white");
+  textAlign(CENTER, BOTTOM);
+  if (!isPlaying) {
+    text("click anywhere to open music box", -width / 2, height * 0.4, width);
+  } else {
+    text("click anywhere to close music box", -width / 2, height * 0.4, width);
   }
+  pop();
 
   // control volumn through GUIs
   ambient.amp(map(lineUI.lineY, 473, 620, 1.5, 0));
@@ -117,5 +117,25 @@ function draw() {
 // Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
 // Click on the web page to start audio
 function touchStarted() {
-  getAudioContext().resume();
+  isPlaying = !isPlaying;
+  if (!isPlaying) {
+    pauseSoundTracks();
+  } else {
+    loopSoundTracks();
+  }
+  console.log(isPlaying);
+}
+
+function loopSoundTracks() {
+  ambient.loop();
+  drums.loop();
+  tune.loop();
+  passage.loop();
+}
+
+function pauseSoundTracks() {
+  ambient.pause();
+  drums.pause();
+  tune.pause();
+  passage.pause();
 }

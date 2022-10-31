@@ -65,30 +65,36 @@ function draw() {
     pop();
   }
 
+  // control volumn through GUIs
+  ambient.amp(map(lineUI.lineY, 473, 621, 1.5, 0));
+  drums.amp(map(circlingBallUI.ellipseY, 216, 331, 1, 0));
+  tune.amp(map(bouncingBallUI.ellipseY, 199, 347, 1, 0));
+
+  // get indivisual sound track volumn
   let ambientVol = ambientAmp.getLevel();
   let drumsVol = drumsAmp.getLevel();
   let tuneVol = tuneAmp.getLevel();
 
   // operate UI methods
-  bouncingBallUI.interact();
+  bouncingBallUI.interact(); // controls tune
   bouncingBallUI.display();
-  lineUI.interact();
+  lineUI.interact(); // controls ambient
   lineUI.display();
-  circlingBallUI.interact();
+  circlingBallUI.interact(); // controls drums
   circlingBallUI.display();
   boxUI.interact();
   boxUI.display();
 
   // operate object methods
-  lines.amplify(ambientVol, lineUI.lineY);
+  lines.amplify(ambientVol, lineUI.lineY); // visualizes ambient
   lines.display();
   bouncingBalls.forEach((ball) => {
-    ball.bounce(bouncingBallUI.ellipseY);
+    ball.bounce(bouncingBallUI.ellipseY); // tune
     ball.display();
   });
-  circlingBall.circle(drumsVol, circlingBallUI.ellipseY);
+  circlingBall.circle(drumsVol, circlingBallUI.ellipseY); // drums
   circlingBall.display();
-  ampBall.amplify(drumsVol, circlingBallUI.ellipseY);
+  ampBall.amplify(drumsVol, circlingBallUI.ellipseY); // drums
   ampBall.display();
   myBox.display(boxUI.movement);
 }

@@ -29,12 +29,12 @@ class Ball {
     this.y += dy * easing;
   }
 
-  bounce(input) {
+  bounce(vol, input) {
     // inspired by N1U on dribble https://dribbble.com/shots/11429742-Defend-the-Cube
     this.color = color(215, 190, 105); // golden
     stroke(this.color);
     strokeWeight(1);
-    let intensity = map(input, 180, 380, 2, 0.001);
+    let intensity = map(input, 239, 328, 50, 15) * vol;
 
     // bounce independently
     this.x = 0;

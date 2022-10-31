@@ -94,7 +94,7 @@ function draw() {
   lines.amplify(ambientVol, lineUI.lineY); // visualizes ambient
   lines.display();
   bouncingBalls.forEach((ball) => {
-    ball.bounce(bouncingBallUI.ellipseY); // tune
+    ball.bounce(tuneVol, bouncingBallUI.ellipseY); // tune
     ball.display();
   });
   circlingBall.circle(drumsVol, circlingBallUI.ellipseY); // drums

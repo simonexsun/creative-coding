@@ -194,7 +194,7 @@ class BoxUI extends UI {
     translate(-width / 2, -height / 2);
     translate(this.x, this.y);
     rotateX(radians(0));
-    // rotateY(radians(-30));
+    rotateY(radians(-30));
 
     // display box (static)
     fill(105, 204, 215, 50);

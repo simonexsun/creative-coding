@@ -42,7 +42,7 @@ class UI {
 class BouncingBallUI extends UI {
   constructor(x, y, w, h) {
     super(x, y, w, h);
-    this.ellipseY = y;
+    this.ellipseY = y + h * 0.4;
     this.color = color(215, 190, 105);
   }
 

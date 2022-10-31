@@ -79,7 +79,6 @@ function draw() {
   ampBall.amplify(vol, circlingBallUI.ellipseY);
   ampBall.display();
   myBox.display(boxUI.movement);
-  console.log(boxUI.movement);
 }
 
 // Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes

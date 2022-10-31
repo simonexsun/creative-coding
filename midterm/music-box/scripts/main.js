@@ -25,11 +25,11 @@ function setup() {
   ambient.loop();
   drums.loop();
   tune.loop();
-  ambientAmp = new p5.Amplitude();
+  ambientAmp = new p5.Amplitude(0.9); // smoothing = 0.9
   ambientAmp.setInput(ambient);
-  drumsAmp = new p5.Amplitude();
+  drumsAmp = new p5.Amplitude(0.9);
   drumsAmp.setInput(drums);
-  tuneAmp = new p5.Amplitude();
+  tuneAmp = new p5.Amplitude(0.9);
   tuneAmp.setInput(tune);
   // Create objects
   for (let i = 0; i < 10; i++) {
@@ -38,7 +38,7 @@ function setup() {
   circlingBall = new Ball();
   ampBall = new Ball();
   myBox = new Box();
-  lines = new LineGroup(40, 200);
+  lines = new LineGroup(40, 50);
   // Create UI
   bouncingBallUI = new BouncingBallUI(width / 6, height / 3, 15, height / 8);
   lineUI = new LineUI(width / 6, (height * 2) / 3, 15, height / 8);

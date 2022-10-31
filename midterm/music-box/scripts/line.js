@@ -9,9 +9,8 @@ class LineGroup {
   }
 
   amplify(vol, input) {
-    let intensity = map(input, 456, 596, 300, 5);
+    let intensity = map(input, 473, 621, 5000, 50);
     this.offset = vol * intensity;
-    // this.l = vol * intensity;
   }
 
   display() {
@@ -20,6 +19,7 @@ class LineGroup {
     stroke(this.color);
     for (let i = 0; i < this.n; i++) {
       push();
+      this.l = random(60);
       rotate(radians((360 / this.n) * i));
       line(0, this.offset + this.l, 0, this.offset);
       pop();

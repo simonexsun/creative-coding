@@ -63,18 +63,23 @@ function setup() {
 function draw() {
   background(0);
 
-  //display text if the music is not playing
+  //display text
   push();
   textFont(myFont);
   textSize(20);
   fill("white");
   textAlign(CENTER, BOTTOM);
   if (!isPlaying) {
-    text("click anywhere to open music box", -width / 2, height * 0.4, width);
+    text("click to open music box", -width / 2, height * 0.4, width);
+    pop();
+
+    hideUI();
   } else {
-    text("click anywhere to close music box", -width / 2, height * 0.4, width);
+    text("click to close music box", -width / 2, height * 0.4, width);
+    pop();
+
+    showUI();
   }
-  pop();
 
   // control volumn through GUIs
   ambient.amp(map(lineUI.lineY, 473, 620, 1.5, 0));
@@ -90,15 +95,7 @@ function draw() {
   let tuneVol = tuneAmp.getLevel();
   let passageVol = passageAmp.getLevel();
 
-  // operate UI methods
-  bouncingBallUI.interact(); // controls tune
-  bouncingBallUI.display();
-  lineUI.interact(); // controls ambient
-  lineUI.display();
-  circlingBallUI.interact(); // controls drums
-  circlingBallUI.display();
-  boxUI.interact(); // controls passage
-  boxUI.display();
+  // showUI();
 
   // operate object methods
   lines.amplify(ambientVol, lineUI.lineY); // visualizes ambient
@@ -114,16 +111,16 @@ function draw() {
   myBox.display(boxUI.movement); // passage
 }
 
-// Chrome 70 will require user gestures to enable web audio api > https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
-// Click on the web page to start audio
-function touchStarted() {
-  isPlaying = !isPlaying;
-  if (!isPlaying) {
-    pauseSoundTracks();
-  } else {
-    loopSoundTracks();
+function mousePressed() {
+  if (mouseY > height * 0.85) {
+    isPlaying = !isPlaying;
+    if (!isPlaying) {
+      hideUI();
+      pauseSoundTracks();
+    } else {
+      loopSoundTracks();
+    }
   }
-  console.log(isPlaying);
 }
 
 function loopSoundTracks() {
@@ -138,4 +135,29 @@ function pauseSoundTracks() {
   drums.pause();
   tune.pause();
   passage.pause();
+}
+
+function showUI() {
+  // reset UI colors
+  bouncingBallUI.color = color(215, 190, 105); // golden
+  lineUI.color = color(235, 131, 131); // red
+  circlingBallUI.color = color(169, 215, 105); // green
+  boxUI.color = color(105, 204, 215); // blue
+
+  // operate UI methods
+  bouncingBallUI.interact(); // controls tune
+  bouncingBallUI.display();
+  lineUI.interact(); // controls ambient
+  lineUI.display();
+  circlingBallUI.interact(); // controls drums
+  circlingBallUI.display();
+  boxUI.interact(); // controls passage
+  boxUI.display();
+}
+
+function hideUI() {
+  bouncingBallUI.color = "black";
+  lineUI.color = "black";
+  circlingBallUI.color = "black";
+  boxUI.color = "black";
 }

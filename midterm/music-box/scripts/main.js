@@ -25,6 +25,12 @@ function setup() {
   ambient.loop();
   drums.loop();
   tune.loop();
+  ambientAmp = new p5.Amplitude();
+  ambientAmp.setInput(ambient);
+  drumsAmp = new p5.Amplitude();
+  drumsAmp.setInput(drums);
+  tuneAmp = new p5.Amplitude();
+  tuneAmp.setInput(tune);
   // Create objects
   for (let i = 0; i < 10; i++) {
     bouncingBalls.push(new Ball());
@@ -59,7 +65,9 @@ function draw() {
     pop();
   }
 
-  let vol = ambientAmp.getLevel();
+  let ambientVol = ambientAmp.getLevel();
+  let drumsVol = drumsAmp.getLevel();
+  let tuneVol = tuneAmp.getLevel();
 
   // operate UI methods
   bouncingBallUI.interact();
@@ -72,15 +80,15 @@ function draw() {
   boxUI.display();
 
   // operate object methods
-  lines.amplify(vol, lineUI.lineY);
+  lines.amplify(ambientVol, lineUI.lineY);
   lines.display();
   bouncingBalls.forEach((ball) => {
     ball.bounce(bouncingBallUI.ellipseY);
     ball.display();
   });
-  circlingBall.circle(vol, circlingBallUI.ellipseY);
+  circlingBall.circle(drumsVol, circlingBallUI.ellipseY);
   circlingBall.display();
-  ampBall.amplify(vol, circlingBallUI.ellipseY);
+  ampBall.amplify(drumsVol, circlingBallUI.ellipseY);
   ampBall.display();
   myBox.display(boxUI.movement);
 }

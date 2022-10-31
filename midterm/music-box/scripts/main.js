@@ -2,7 +2,7 @@
 // easing tutorial from https://p5js.org/examples/input-easing.html
 // sound tracks from artist Helios, aquired from http://unseen-music.com/yume/loops/trimmed/
 
-let song, amp;
+let ambient, drums, tune, ambientAmp, drumsAmp, tuneAmp;
 let circlingBall, ampBall, lines, mybox;
 let bouncingBallUI, lineUI, circlingBallUI, boxUI;
 let bouncingBalls = [];
@@ -11,7 +11,10 @@ let myFont;
 
 function preload() {
   // preload audio
-  song = loadSound("audio/giorgui-cut.mp3");
+  ambient = loadSound("audio/ambient01.mp3");
+  drums = loadSound("audio/drums01.mp3");
+  tune = loadSound("audio/tune01.mp3");
+
   // preload font
   myFont = loadFont("fonts/PoiretOne-Regular.ttf");
 }
@@ -19,8 +22,9 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   // loop audio
-  song.loop();
-  amp = new p5.Amplitude();
+  ambient.loop();
+  drums.loop();
+  tune.loop();
   // Create objects
   for (let i = 0; i < 10; i++) {
     bouncingBalls.push(new Ball());
@@ -55,7 +59,7 @@ function draw() {
     pop();
   }
 
-  let vol = amp.getLevel();
+  let vol = ambientAmp.getLevel();
 
   // operate UI methods
   bouncingBallUI.interact();

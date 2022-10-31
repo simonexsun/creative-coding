@@ -18,7 +18,7 @@ class Ball {
 
     // smoothen the movement
     let easing = 0.5;
-    let intensity = map(input, 216, 331, 250, 0.1);
+    let intensity = map(input, 216, 331, 600, 10);
 
     let targetX = intensity * vol * sin(millis() * 0.001);
     let dx = targetX - this.x;
@@ -52,7 +52,7 @@ class Ball {
     strokeWeight(7);
     stroke(this.color);
 
-    let intensity = map(input, 216, 331, 250, 0.1);
+    let intensity = map(input, 216, 331, 600, 10);
 
     // without easing
     this.d = vol * intensity;

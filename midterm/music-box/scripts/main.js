@@ -71,9 +71,9 @@ function draw() {
   }
 
   // control volumn through GUIs
-  ambient.amp(map(lineUI.lineY, 473, 621, 1.5, 0));
+  ambient.amp(map(lineUI.lineY, 473, 620, 1.5, 0));
   drums.amp(map(circlingBallUI.ellipseY, 216, 331, 1, 0));
-  tune.amp(map(bouncingBallUI.ellipseY, 199, 347, 1, 0));
+  tune.amp(map(bouncingBallUI.ellipseY, 239, 328, 1, 0));
 
   // get indivisual sound track volumn
   let ambientVol = ambientAmp.getLevel();

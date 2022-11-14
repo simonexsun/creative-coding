@@ -21,14 +21,15 @@ void setup() {
 }
 
 void loop() {
-  // reads the input on analog pin A0 (value between 0 and 1023)
+  // reads the input on analog pin A0 (value 0-1023, actually reading 0-20) and map to 0-1000
   int analogValue = analogRead(A0);
+  float mappedValue = (1000.0 / 25.0 ) * analogValue;
 
   Serial.print("Analog reading: ");
-  Serial.print(analogValue);   // the raw analog reading
+  Serial.println(mappedValue);   // the raw analog reading
 
   // set threshholds for different events
-  if (analogValue < 50) {
+  if (mappedValue < 150) {
     // turn on all LEDs
     digitalWrite(LED_1, HIGH);
     digitalWrite(LED_2, HIGH);
@@ -36,7 +37,7 @@ void loop() {
     digitalWrite(LED_4, HIGH);
     digitalWrite(LED_5, HIGH);
     digitalWrite(LED_6, HIGH);
-  } else if (analogValue < 200) {
+  } else if (mappedValue < 250) {
     // turn on 5 LEDs
     digitalWrite(LED_1, HIGH);
     digitalWrite(LED_2, HIGH);
@@ -44,7 +45,7 @@ void loop() {
     digitalWrite(LED_4, HIGH);
     digitalWrite(LED_5, HIGH);
     digitalWrite(LED_6, LOW);
-  } else if (analogValue < 400) {
+  } else if (mappedValue < 350) {
     // turn on 4 LEDs
     digitalWrite(LED_1, HIGH);
     digitalWrite(LED_2, HIGH);
@@ -52,7 +53,7 @@ void loop() {
     digitalWrite(LED_4, HIGH);
     digitalWrite(LED_5, LOW);
     digitalWrite(LED_6, LOW);
-  } else if (analogValue < 600) {
+  } else if (mappedValue < 450) {
     // turn on 3 LEDs
     digitalWrite(LED_1, HIGH);
     digitalWrite(LED_2, HIGH);
@@ -60,7 +61,7 @@ void loop() {
     digitalWrite(LED_4, LOW);
     digitalWrite(LED_5, LOW);
     digitalWrite(LED_6, LOW);
-  } else if (analogValue < 800) {
+  } else if (mappedValue < 550) {
     // turn on 2 LEDs
     digitalWrite(LED_1, HIGH);
     digitalWrite(LED_2, HIGH);
@@ -68,9 +69,17 @@ void loop() {
     digitalWrite(LED_4, LOW);
     digitalWrite(LED_5, LOW);
     digitalWrite(LED_6, LOW);
-  } else {
+  } else if (mappedValue < 650) {
     // turn on 1 LEDs
     digitalWrite(LED_1, HIGH);
+    digitalWrite(LED_2, LOW);
+    digitalWrite(LED_3, LOW);
+    digitalWrite(LED_4, LOW);
+    digitalWrite(LED_5, LOW);
+    digitalWrite(LED_6, LOW);
+  } else {
+    // turn on 0 LEDs
+    digitalWrite(LED_1, LOW);
     digitalWrite(LED_2, LOW);
     digitalWrite(LED_3, LOW);
     digitalWrite(LED_4, LOW);

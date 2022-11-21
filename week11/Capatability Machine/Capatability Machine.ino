@@ -22,9 +22,12 @@ int analogInput_1 = 0;
 int analogInput_2 = 0;
 int pMappedInput;
 bool isUser_1 = true;
+bool confirmed = false;
 
-const int buttonPin = 3;
-int buttonState = 0; 
+const int switchButtonPin = 2;
+const int confirmButtonPin = 3;
+int switchButtonState; 
+int confirmButtonState; 
 
 int buzzerPin = 2;                    //Buzzer used for sound feedback
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);  //Assign LCD screen pins, as per LCD shield requirements
@@ -62,52 +65,78 @@ void setup() {
 
 void loop() {
   // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
-  // If the pushbutton is pressed (HIGH), switch to another user
-  if (buttonState == HIGH) {
-    // turn LED on:
+  switchButtonState = digitalRead(switchButtonPin);
+  confirmButtonState = digitalRead(confirmButtonPin);
+  // if the confirm button is pushed, show result
+  if (confirmButtonState == HIGH){
+    confirmed = true;
+  }
+  // if the other button is pressed (HIGH), switch to another user
+  if (switchButtonState == HIGH) {
+    confirmed = false;
     isUser_1 = !isUser_1;
   }
-  int mappedInput = map(analogRead(A0), 0, 1023, 1, 12);
 
-  // update the input values only when mappedInput changes
-  if(mappedInput != pMappedInput){
-    if(isUser_1){      
-      analogInput_1 = mappedInput;
-      user = "User 1: ";   
+
+  if (confirmed){
+    // result mode:
+
+    // check if input vlaues are defined by users
+    if(analogInput_1 != 0 && analogInput_2 != 0) {
+      RGB_light(0, 200, 0); // green
+      user = "You will love.";
+      displayValue = *;
     }else{
-      analogInput_2 = mappedInput;
-      user = "User 2: ";
+      user = "missing input";
+      delay(2000);
+      if(isUser_1){
+        user = "User 1 - month: ";   
+        displayValue = analogInput_1;
+      }else{
+        user = "User 2 - month: ";     
+        displayValue = analogInput_2;
+      }
     }
-    pMappedInput = mappedInput; // update previous mappedInput
-  }
-
-  // update user info
-  if(isUser_1){
-    user = "User 1: ";   
-    displayValue = analogInput_1;
   }else{
-    user = "User 2: ";     
-    displayValue = analogInput_2;
+    // input mode:
+    RGB_light(0, 0, 0);
+    int mappedInput = map(analogRead(A0), 0, 1023, 1, 12);
+
+    // update the input values only when mappedInput changes
+    if(mappedInput != pMappedInput){
+      if(isUser_1){      
+        analogInput_1 = mappedInput;
+        user = "User 1: ";   
+      }else{
+        analogInput_2 = mappedInput;
+        user = "User 2: ";
+      }
+      pMappedInput = mappedInput; // update previous mappedInput
+    }
+    
+    // update user info
+    if(isUser_1){
+      user = "User 1 - month: ";   
+      displayValue = analogInput_1;
+    }else{
+      user = "User 2 - month: ";     
+      displayValue = analogInput_2;
+    }
   }
 
   // debugging
-  Serial.print("current: " + user + "; ");
-  Serial.print(analogInput_1);
+  Serial.print(switchButtonState);
   Serial.print(", ");
-  Serial.println(analogInput_2);
+  Serial.println(confirmButtonState);
 
   // LCD visual feedback
   lcd.setCursor(0, 0);  // line 1
   lcd.print(user);
-  lcd.print(displayValue);  // Display analog input
   lcd.setCursor(0, 1);  // line 2
-  lcd.print("(Button=confirm)");
+  lcd.print(displayValue);
 
   delay(500);      // delay for stability
   lcd.clear();      // Clear the display
-
-  RGB_light(255, 0, 0); // Red
 }
 
 void RGB_light(int r, int g, int b){

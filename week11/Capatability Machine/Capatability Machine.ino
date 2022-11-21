@@ -47,11 +47,17 @@ void setup() {
   lcd.begin(16, 2);  // columns, rows.  use 16,2 for a 16x2 LCD, etc.
   lcd.clear();
   lcd.setCursor(0, 0);  //Display some text on LCD then clear it
-  lcd.print("Keypad");
+  lcd.print("Compatability");
   lcd.setCursor(0, 1);
-  lcd.print("One Input");
-  delay(2000);
+  lcd.print("Machine");
+  delay(3000);
+
   lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Input your");
+  lcd.setCursor(0, 1);
+  lcd.print("birth of months");
+  delay(3000);
 }
 
 void loop() {
@@ -98,8 +104,8 @@ void loop() {
   lcd.setCursor(0, 1);  // line 2
   lcd.print("(Button=confirm)");
 
-  delay(500);      //Wait one second
-  lcd.clear();      //Clear the display
+  delay(500);      // delay for stability
+  lcd.clear();      // Clear the display
 
   RGB_light(255, 0, 0); // Red
 }

@@ -1,4 +1,5 @@
 // LCD tutorial from Arduino example
+// RGB LED tutorial from Arduino, https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e
 // buzzer tutorial from Arduino, https://create.arduino.cc/projecthub/SURYATEJA/use-a-buzzer-module-piezo-speaker-using-arduino-uno-89df45
 
 /* LCD circuit:
@@ -31,10 +32,17 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);  //Assign LCD screen pins, as per LCD shiel
 int displayValue;
 String user;
 
+int redPin= 10;
+int greenPin = 11;
+int bluePin = 12;
+
 void setup() {
   Serial.begin(9600);
 
   pinMode(buzzerPin, OUTPUT);
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
 
   lcd.begin(16, 2);  // columns, rows.  use 16,2 for a 16x2 LCD, etc.
   lcd.clear();
@@ -92,4 +100,8 @@ void loop() {
 
   delay(500);      //Wait one second
   lcd.clear();      //Clear the display
+  analogWrite(redPin,255);
+  analogWrite(greenPin,0);
+  analogWrite(bluePin,200);
+  // RGB_color(255, 0, 0); // Red
 }

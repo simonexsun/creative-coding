@@ -100,8 +100,12 @@ void loop() {
 
   delay(500);      //Wait one second
   lcd.clear();      //Clear the display
-  analogWrite(redPin,255);
-  analogWrite(greenPin,0);
-  analogWrite(bluePin,200);
-  // RGB_color(255, 0, 0); // Red
+
+  RGB_light(255, 0, 0); // Red
+}
+
+void RGB_light(int r, int g, int b){
+  analogWrite(redPin, r);
+  analogWrite(greenPin, g);  
+  analogWrite(bluePin, b);
 }

@@ -83,9 +83,16 @@ void loop() {
 
     // check if input vlaues are defined by users
     if(analogInput_1 != 0 && analogInput_2 != 0) {
-      RGB_light(0, 200, 0); // green
-      user = "You will love.";
-      displayValue = *;
+      // compare two inputs, and process for result
+      if ((analogInput_1 + analogInput_2) % 2 == 0){
+        RGB_light(0, 255, 0); // green
+        user = "You will love.";
+        displayValue = analogInput_1 + analogInput_2;
+      }else{
+        RGB_light(255, 0, 0); // red
+        user = "You will fight.";
+        displayValue = analogInput_1 + analogInput_2;
+      }
     }else{
       user = "missing input";
       delay(2000);

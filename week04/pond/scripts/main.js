@@ -76,8 +76,6 @@ function setup() {
 
 function draw() {
   background(waterColor);
-  // display objects at low frame rate
-  // frameRate(5);
 
   ripples.forEach((ripple) => {
     ripple.display();

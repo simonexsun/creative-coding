@@ -284,8 +284,13 @@ function portOpen() {
 
 function serialEvent() {
   // read a byte from the serial port, convert it to a number:
-  inString = serial.readLine();
-  inData = JSON.parse(inString); // parse string into json
+  const inString = serial.readLine(); // returns full line, or NOTHING if not ready
+  if (inString) {
+    // parse inData only when it's defined
+    inData = JSON.parse(inString); // parse string into json
+    joyStickX = map(inData.x, -512, 512, -5, 5);
+    joyStickY = map(inData.y, -512, 512, -5, 5);
+  }
 }
 
 function serialError(err) {

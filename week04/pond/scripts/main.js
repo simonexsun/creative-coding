@@ -243,7 +243,7 @@ function portOpen() {
 function serialEvent() {
   // read a byte from the serial port, convert it to a number:
   inString = serial.readLine();
-  inData = inString;
+  inData = JSON.parse(inString); // parse string into json
 }
 
 function serialError(err) {

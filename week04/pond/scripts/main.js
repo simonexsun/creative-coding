@@ -1,3 +1,5 @@
+// joystick curser movements inspired by https://editor.p5js.org/L05/sketches/l-66JjVKt
+
 let s, seed; // scribble
 let myFont, frogGif; // UI
 let waterSounds = [];
@@ -6,6 +8,8 @@ let waterColor, leafColor; // color variables
 let ripples = [];
 let leaves = [];
 let frog, frogX, frogY, frogFound; // object variables
+
+let x, y, velX, velY; // P-Comp curser (joystick) variables
 
 // Serial variables
 let serial; // variable to hold an instance of the serialport library
@@ -54,6 +58,12 @@ function setup() {
   frogSize = leaves[2].d * 0.6;
   frogFound = false;
 
+  // P-Comp curser initial position and velocity
+  x = 200; // initial position
+  y = 200;
+  velX = 0; // velocity
+  velY = 0;
+
   // Serial setup
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on("list", printList); // set a callback function for the serialport list event
@@ -90,6 +100,35 @@ function draw() {
   leaves.forEach((leaf) => {
     leaf.display();
   });
+
+  // use Joystick's output to update velocity
+  velX += j.valX;
+  velY += j.valY;
+
+  // limit curser within canvas boarder
+  curserX = x + velX;
+  curserY = y + velY;
+  if (curserX > width) {
+    curserX = width;
+    velX = width - x;
+  } else if (curserX < 0) {
+    curserX = 0;
+    velX = 0;
+  } else {
+    curserX = x + velX;
+  }
+  if (y + velY > height) {
+    curserY = height;
+    velY = height - y;
+  } else if (curserY < 0) {
+    curserY = 0;
+    velY = 0;
+  } else {
+    curserY = y + velY;
+  }
+
+  // display P-Comp curser
+  ellipse(curserX, curserY, 10);
 
   console.log(inData);
 }

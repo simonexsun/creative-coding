@@ -59,8 +59,8 @@ function setup() {
   frogFound = false;
 
   // P-Comp curser initial position and velocity
-  x = 200; // initial position
-  y = 200;
+  x = width / 2; // initial position at the center of the screen
+  y = height / 2;
   velX = 0; // velocity
   velY = 0;
 

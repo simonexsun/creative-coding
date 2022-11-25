@@ -140,7 +140,10 @@ function draw() {
     if (inData.button == 1) {
       // first press, pick up lily pad
       // second press, release lily pad
+      fill("red");
+      ellipse(curserX, curserY, 10);
     }
+
     prebiousInDataX = joyStickX;
     prebiousInDataY = joyStickY;
   }

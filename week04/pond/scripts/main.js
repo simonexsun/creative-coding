@@ -13,7 +13,7 @@ let x, y, velX, velY; // P-Comp curser (joystick) variables
 
 // Serial variables
 let serial; // variable to hold an instance of the serialport library
-let portName = "/dev/tty.usbmodem1101"; // fill in your serial port name here
+let portName = "/dev/tty.usbmodem101"; // fill in your serial port name here
 let inData; // for incoming serial data (in the form of JSON)
 let portSelector;
 

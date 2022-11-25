@@ -29,11 +29,11 @@ void loop()
   mapX = map(xPosition, 0, 1023, -512, 512) + offsetX;
   mapY = map(yPosition, 0, 1023, -512, 512) + offsetY;
 
-  Serial.print("{x: ");
+  Serial.print("{\"x\": ");
   Serial.print(mapX);
-  Serial.print(", y: ");
+  Serial.print(", \"y\": ");
   Serial.print(mapY);
-  Serial.print(", button: ");
+  Serial.print(", \"button\": ");
   Serial.print(!SW_state); // reverse button state to: 1 when pressed, 0 when released
   Serial.println("}");
 

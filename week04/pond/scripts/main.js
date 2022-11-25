@@ -122,12 +122,11 @@ function draw() {
     velY = 0;
   } else {
     curserY = y + velY;
-  }
-
-  // display P-Comp curser
-  ellipse(curserX, curserY, 10);
 
   console.log(inData);
+    // display P-Comp curser
+    fill("black");
+    ellipse(curserX, curserY, 10);
 
   // TODO: add joystickPressed actions
   if (inData.button == 1) {

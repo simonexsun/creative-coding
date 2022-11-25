@@ -132,7 +132,6 @@ function draw() {
       curserY = y + velY;
     }
 
-  console.log(inData);
     // display P-Comp curser
     fill("black");
     ellipse(curserX, curserY, 10);

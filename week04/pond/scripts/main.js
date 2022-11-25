@@ -97,41 +97,53 @@ function draw() {
     leaf.display();
   });
 
-  // TODO: use P-Comp curser is an option
-  // use Joystick's output to update velocity
-  velX += inData.x;
-  velY += inData.y;
+  if (inData) {
+    let prebiousInDataX = 0;
+    let prebiousInDataY = 0;
+    // TODO: use P-Comp curser is an option
+    // use Joystick's output to update velocity
+    if (
+      abs(joyStickX - prebiousInDataX) > 0 ||
+      abs(joyStickY - prebiousInDataY) > 0
+    ) {
+      velX += joyStickX;
+      velY += joyStickY;
+    }
 
-  // limit curser within canvas boarder
-  curserX = x + velX;
-  curserY = y + velY;
-  if (curserX > width) {
-    curserX = width;
-    velX = width - x;
-  } else if (curserX < 0) {
-    curserX = 0;
-    velX = 0;
-  } else {
+    // limit curser within canvas boarder
     curserX = x + velX;
-  }
-  if (y + velY > height) {
-    curserY = height;
-    velY = height - y;
-  } else if (curserY < 0) {
-    curserY = 0;
-    velY = 0;
-  } else {
     curserY = y + velY;
+    if (curserX > width) {
+      curserX = width;
+      velX = width - x;
+    } else if (curserX < 0) {
+      curserX = 0;
+      velX = 0;
+    } else {
+      curserX = x + velX;
+    }
+    if (y + velY > height) {
+      curserY = height;
+      velY = height - y;
+    } else if (curserY < 0) {
+      curserY = 0;
+      velY = 0;
+    } else {
+      curserY = y + velY;
+    }
 
   console.log(inData);
     // display P-Comp curser
     fill("black");
     ellipse(curserX, curserY, 10);
 
-  // TODO: add joystickPressed actions
-  if (inData.button == 1) {
-    // first press, pick up lily pad
-    // second press, release lily pad
+    // TODO: add joystickPressed actions
+    if (inData.button == 1) {
+      // first press, pick up lily pad
+      // second press, release lily pad
+    }
+    prebiousInDataX = joyStickX;
+    prebiousInDataY = joyStickY;
   }
 }
 

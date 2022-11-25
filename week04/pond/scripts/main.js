@@ -101,6 +101,7 @@ function draw() {
     leaf.display();
   });
 
+  // TODO: use P-Comp curser is an option
   // use Joystick's output to update velocity
   velX += inData.x;
   velY += inData.y;

@@ -102,8 +102,8 @@ function draw() {
   });
 
   // use Joystick's output to update velocity
-  velX += j.valX;
-  velY += j.valY;
+  velX += inData.x;
+  velY += inData.y;
 
   // limit curser within canvas boarder
   curserX = x + velX;

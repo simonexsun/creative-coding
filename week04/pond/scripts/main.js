@@ -132,6 +132,12 @@ function draw() {
   ellipse(curserX, curserY, 10);
 
   console.log(inData);
+
+  // TODO: add joystickPressed actions
+  if (inData.button == 1) {
+    // first press, pick up lily pad
+    // second press, release lily pad
+  }
 }
 
 function mousePressed() {

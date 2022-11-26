@@ -140,17 +140,18 @@ function draw() {
     if (inData.button == 0 && previousButtonState == 1) {
       isGrabbing = !isGrabbing;
     }
+
+    let curserR = 15;
     if (isGrabbing) {
       // first press, pick up lily pad
-      fill("white");
-      // display P-Comp curser
-      ellipse(curserX, curserY, 10);
+      let curserR = 10; // reduce curser size
     } else {
       // second press, release lily pad
-      fill("white");
-      // display P-Comp curser
-      ellipse(curserX, curserY, 15);
+      curserR = 15; // enlarge curser size
     }
+    // display P-Comp curser
+    fill("white");
+    ellipse(curserX, curserY, curserR);
 
     prebiousInDataX = joyStickX;
     prebiousInDataY = joyStickY;

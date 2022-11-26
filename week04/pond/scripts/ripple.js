@@ -1,9 +1,9 @@
 // ripple effect from https://editor.p5js.org/chjno/sketches/BkbTpyojZ
 
 class Ripple {
-  constructor() {
-    this.x = mouseX;
-    this.y = mouseY;
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
     this.outerDiam = 0;
   }
 

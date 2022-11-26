@@ -138,36 +138,51 @@ function draw() {
 
     // interact with objects on button state changed
     if (inData.button == 0 && previousButtonState == 1) {
-      isGrabbing = !isGrabbing;
+      // button state changed and button is released
       leaves.forEach((leaf) => {
         if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
+          isGrabbing = !isGrabbing;
+
           if (isGrabbing) {
             leaf.enlarge();
           } else {
             // second press, release lily pad
             leaf.reduct();
+            makeNewRipple(curserX, curserY);
+            let waterBloop = random(waterSounds);
+            waterBloop.play();
           }
         }
       });
+      if (!isGrabbing) {
+        makeNewRipple(curserX, curserY);
+        let waterBloop = random(waterSounds);
+        waterBloop.play();
+      }
     }
 
     // update curser UI
     let curserR = 15;
     if (isGrabbing) {
+      fill("black");
       curserR = 10; // reduce curser size
       leaves.forEach((leaf) => {
         if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
           if (isGrabbing) {
+            // move leaf with curser
             leaf.x = curserX;
             leaf.y = curserY;
           }
         }
       });
-    } else {
+    } else if (inData.button == 1) {
+      fill("black");
+      curserR = 10; // reduce curser size
+    } else if (inData.button == 0) {
+      fill("white");
       curserR = 15; // enlarge curser size
     }
     // display P-Comp curser
-    fill("white");
     ellipse(curserX, curserY, curserR);
 
     prebiousInDataX = joyStickX;
@@ -202,7 +217,7 @@ function mouseDragged() {
 }
 
 function mouseReleased() {
-  makeNewRipple();
+  makeNewRipple(mouseX, mouseY);
 
   let waterBloop = random(waterSounds);
   waterBloop.play();
@@ -214,8 +229,8 @@ function mouseReleased() {
   });
 }
 
-function makeNewRipple() {
-  let newRipple = new Ripple();
+function makeNewRipple(x, y) {
+  let newRipple = new Ripple(x, y);
   ripples.push(newRipple);
   console.log(ripples);
 }

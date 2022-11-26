@@ -157,8 +157,6 @@ function draw() {
       curserR = 10; // reduce curser size
       leaves.forEach((leaf) => {
         if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
-          let leafX = leaf.x;
-          let leafY = leaf.y;
           if (isGrabbing) {
             leaf.x = curserX;
             leaf.y = curserY;

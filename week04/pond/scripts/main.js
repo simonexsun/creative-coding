@@ -136,7 +136,6 @@ function draw() {
       curserY = y + velY;
     }
 
-    let previousCurserX, previousCurserY;
     // interact with objects on button state changed
     if (inData.button == 0 && previousButtonState == 1) {
       isGrabbing = !isGrabbing;
@@ -144,8 +143,6 @@ function draw() {
         if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
           if (isGrabbing) {
             leaf.enlarge();
-            previousCurserX = curserX;
-            previousCurserY = curserY;
           } else {
             // second press, release lily pad
             leaf.reduct();
@@ -163,8 +160,6 @@ function draw() {
           let leafX = leaf.x;
           let leafY = leaf.y;
           if (isGrabbing) {
-            leaf.x = leafX + (curserX - previousCurserX);
-            leaf.y = leafY + (curserY - previousCurserY);
             leaf.x = curserX;
             leaf.y = curserY;
           }

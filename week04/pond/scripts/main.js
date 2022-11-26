@@ -172,6 +172,14 @@ function draw() {
             // move leaf with curser
             leaf.x = curserX;
             leaf.y = curserY;
+
+            if (!frogFound) {
+              if (!isFrogCovered(leaves[2].x, leaves[2].y, leaves[2].d / 2)) {
+                // image(frogGif, frogX, frogY, frogSize, frogSize);
+                frogCall.play();
+                frogFound = true;
+              }
+            }
           }
         }
       });

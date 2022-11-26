@@ -9,7 +9,9 @@ let ripples = [];
 let leaves = [];
 let frog, frogX, frogY, frogFound; // object variables
 
-let x, y, velX, velY; // P-Comp curser (joystick) variables
+let x, y, velX, velY, isGrabbing; // P-Comp curser (joystick) variables
+
+let previousButtonState = 0;
 
 // Serial variables
 let serial; // variable to hold an instance of the serialport library
@@ -63,6 +65,7 @@ function setup() {
   y = height / 2;
   velX = 0; // velocity
   velY = 0;
+  isGrabbing = false;
 
   // Serial setup
   serial = new p5.SerialPort(); // make a new instance of the serialport library
@@ -100,6 +103,7 @@ function draw() {
   if (inData) {
     let prebiousInDataX = 0;
     let prebiousInDataY = 0;
+
     // TODO: use P-Comp curser is an option
     // use Joystick's output to update velocity
     if (
@@ -132,20 +136,25 @@ function draw() {
       curserY = y + velY;
     }
 
-    // display P-Comp curser
-    fill("black");
-    ellipse(curserX, curserY, 10);
-
-    // TODO: add joystickPressed actions
-    if (inData.button == 1) {
+    // act on button state changed
+    if (inData.button == 0 && previousButtonState == 1) {
+      isGrabbing = !isGrabbing;
+    }
+    if (isGrabbing) {
       // first press, pick up lily pad
-      // second press, release lily pad
-      fill("red");
+      fill("white");
+      // display P-Comp curser
       ellipse(curserX, curserY, 10);
+    } else {
+      // second press, release lily pad
+      fill("white");
+      // display P-Comp curser
+      ellipse(curserX, curserY, 15);
     }
 
     prebiousInDataX = joyStickX;
     prebiousInDataY = joyStickY;
+    previousButtonState = inData.button;
   }
 }
 

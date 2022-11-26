@@ -136,17 +136,41 @@ function draw() {
       curserY = y + velY;
     }
 
-    // act on button state changed
+    let previousCurserX, previousCurserY;
+    // interact with objects on button state changed
     if (inData.button == 0 && previousButtonState == 1) {
       isGrabbing = !isGrabbing;
+      leaves.forEach((leaf) => {
+        if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
+          if (isGrabbing) {
+            leaf.enlarge();
+            previousCurserX = curserX;
+            previousCurserY = curserY;
+          } else {
+            // second press, release lily pad
+            leaf.reduct();
+          }
+        }
+      });
     }
 
+    // update curser UI
     let curserR = 15;
     if (isGrabbing) {
-      // first press, pick up lily pad
-      let curserR = 10; // reduce curser size
+      curserR = 10; // reduce curser size
+      leaves.forEach((leaf) => {
+        if (isCurserInside(leaf.x, leaf.y, leaf.d / 2)) {
+          let leafX = leaf.x;
+          let leafY = leaf.y;
+          if (isGrabbing) {
+            leaf.x = leafX + (curserX - previousCurserX);
+            leaf.y = leafY + (curserY - previousCurserY);
+            leaf.x = curserX;
+            leaf.y = curserY;
+          }
+        }
+      });
     } else {
-      // second press, release lily pad
       curserR = 15; // enlarge curser size
     }
     // display P-Comp curser
@@ -205,6 +229,15 @@ function makeNewRipple() {
 
 function isMouseInside(x, y, r) {
   let d = dist(mouseX, mouseY, x, y);
+  if (d <= r) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isCurserInside(x, y, r) {
+  let d = dist(curserX, curserY, x, y);
   if (d <= r) {
     return true;
   } else {

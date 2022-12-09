@@ -16,6 +16,7 @@ const rxCharacteristic = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; // receive is f
 let myCharacteristic;
 let myBLE;
 let receiveText;
+
 function bleSetup() {
   myBLE = new p5ble();
   createElement("br");
@@ -23,16 +24,26 @@ function bleSetup() {
   // Create a 'Connect and Start Notifications' button
   const connectButton = createButton("Connect");
   connectButton.mousePressed(connectAndStartNotify);
-  connectButton.style("width: 100%; height: 100px; fontSize: 30pt;");
-  createElement("br");
+  connectButton.style(
+    "width: 33.3%; height: 150px; border-radius: 100px; border:none; 100px; fontSize: 20pt; background-color: #7dafff;"
+  );
+  // Create a 'Reset Data' button
+  const resetButton = createButton("Reset");
+  resetButton.style(
+    "width: 33.3%; height: 150px; border-radius: 100px; border:none; 100px; fontSize: 20pt; background-color: #88d193;"
+  );
+  resetButton.mousePressed(resetData);
   // Create a 'Stop Notifications' button
   const stopButton = createButton("Stop");
-  stopButton.style("width: 100%; height: 100px; fontSize: 30pt;");
+  stopButton.style(
+    "width: 33.3%; height: 150px; border-radius: 100px; border:none; 100px; fontSize: 20pt; background-color: #ff7d7d;"
+  );
   stopButton.mousePressed(stopNotifications);
+
   createElement("br");
 
   receiveText = createElement("textarea", "").id("receiveText");
-  receiveText.style("width: 100%; height: 100px; ");
+  receiveText.style("width: 100%; height: 100px;  ");
 }
 
 function connectAndStartNotify() {
@@ -60,12 +71,12 @@ function gotCharacteristics(error, characteristics) {
 
 // A function that will be called once got characteristics
 function handleNotifications(data) {
-  let receiveText = document.getElementById("receiveText");
-  receiveText.value += data;
-  receiveText.scrollTop = receiveText.scrollHeight;
-  if (data === "\n") {
-    handleLineBreak(receiveText.value);
-    receiveText.value = "";
+  // get everything before "\n", and turn that from a string to a number
+  // The first argument is the string to convert. The second argument is called the radix -- the base number used in mathematical systems. For our use, it should always be 10.
+  const num = parseInt(data.trimEnd(), 10);
+  if (num) {
+    console.log(num);
+    updateCounter(num);
   }
 }
 

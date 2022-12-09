@@ -38,11 +38,6 @@ function bleSetup() {
     "width: 33.3%; height: 150px; border-radius: 100px; border:none; 100px; fontSize: 20pt; background-color: #ff7d7d;"
   );
   stopButton.mousePressed(stopNotifications);
-
-  createElement("br");
-
-  receiveText = createElement("textarea", "").id("receiveText");
-  receiveText.style("width: 100%; height: 100px;  ");
 }
 
 function connectAndStartNotify() {
@@ -102,7 +97,7 @@ UI functions
 */
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight * 0.75);
+  canvas = createCanvas(windowWidth, windowHeight * 0.9);
   bleSetup();
 }
 

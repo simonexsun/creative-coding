@@ -110,7 +110,8 @@ function draw() {
   background("#f5f6fa");
   updateDistance();
   // update speed every second
-  if (frameCount % targetFrameRate === 0) {
+  const multiplier = 1;
+  if (frameCount % (targetFrameRate * multiplier) === 0) {
     updateSpeed();
   }
 
@@ -120,12 +121,20 @@ function draw() {
   text(`diameter: ${diameter} inches`, 10, 100);
   text(`turns: ${turns} times`, 10, 200);
   text(`total distance: ${updateDistance() / 12} feet`, 10, 400);
-  text(`instant speed: ${speed} turns/sec`, 10, 500);
+  text(`instant speed: ${speed} turns/sec (${mph(speed)} mph)`, 10, 500);
 
   fill(randomColor);
   noStroke();
   let e = map(speed, 0, 4, 5, 100);
-  ellipse(width / 2, height / 2, e);
+  // ellipse(width / 2, height / 2, e);
+}
+
+// convert turns per second to miles per hour
+function mph(speed) {
+  const distOfTurn = PI * diameter; // in inches
+  const turnsPerHour = speed * 3600;
+  const inchesPerMile = 63360;
+  return round((distOfTurn * turnsPerHour) / inchesPerMile, 2);
 }
 
 function updateSpeed() {

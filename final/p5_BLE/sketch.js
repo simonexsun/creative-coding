@@ -93,14 +93,17 @@ let offset = 0;
 
 const targetFrameRate = 60;
 
+let randomColor;
+
 /*
 UI functions 
 */
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowWidth);
+  canvas = createCanvas(windowWidth, windowHeight * 0.9);
   bleSetup();
   frameRate(targetFrameRate);
+  randomColor = color(random(100, 255), random(100, 255), random(100, 255));
 }
 
 function draw() {
@@ -113,16 +116,21 @@ function draw() {
 
   textAlign(LEFT);
   textSize(50);
+  fill(0);
+  text(`diameter: ${diameter} inches`, 10, 100);
+  text(`turns: ${turns} times`, 10, 200);
+  text(`total distance: ${updateDistance() / 12} feet`, 10, 400);
+  text(`instant speed: ${speed} turns/sec`, 10, 500);
 
-  text(`diameter: ${diameter}`, 10, 100);
-  text(`turns: ${turns}`, 10, 200);
-  text(`total distance: ${distance}`, 10, 400);
-  text(`speed: ${speed}`, 10, 500);
+  fill(randomColor);
+  noStroke();
+  let e = map(speed, 0, 4, 5, 100);
+  ellipse(width / 2, height / 2, e);
 }
 
 function updateSpeed() {
   const dist = getInstantDistance();
-  speed = dist / 12; // speed unit: feet/sec
+  speed = dist; // turns/sec
 }
 
 function getInstantDistance() {
@@ -135,7 +143,8 @@ function getInstantDistance() {
 
 function updateDistance() {
   // alculate the total distance since the begining
-  distance = turns * PI * diameter;
+  distance = turns;
+  return turns * PI * diameter;
 }
 
 // A function to set rotation counts back to 0

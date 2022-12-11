@@ -110,7 +110,7 @@ function draw() {
   background("#f5f6fa");
   updateDistance();
   // update speed every second
-  const multiplier = 1;
+  const multiplier = 5;
   if (frameCount % (targetFrameRate * multiplier) === 0) {
     updateSpeed();
   }
@@ -125,8 +125,8 @@ function draw() {
 
   fill(randomColor);
   noStroke();
-  let e = map(speed, 0, 4, 5, 100);
-  // ellipse(width / 2, height / 2, e);
+  let mappedSpeed = map(speed, 0, 25, 100, 500);
+  ellipse(width / 2, height / 2, mappedSpeed);
 }
 
 // convert turns per second to miles per hour

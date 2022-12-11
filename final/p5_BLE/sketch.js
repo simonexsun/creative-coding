@@ -83,34 +83,60 @@ UI-related variables
 */
 
 let turns = 0;
-const diameter = 10;
-let speed = 0;
+const diameter = 2; // 2 inches wheel diameter
+let distance = 0; // distance = turns * PI * diameter
+let previousInstantDistance = 0;
+let speed = 0; // speed = distance / time
 
 let lastCounter;
 let offset = 0;
 
-let life_time_value;
-let previous_lifetime_value;
+const targetFrameRate = 60;
 
 /*
 UI functions 
 */
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight * 0.9);
+  canvas = createCanvas(windowWidth, windowWidth);
   bleSetup();
+  frameRate(targetFrameRate);
 }
 
 function draw() {
   background("#f5f6fa");
+  updateDistance();
+  // update speed every second
+  if (frameCount % targetFrameRate === 0) {
+    updateSpeed();
+  }
 
   textAlign(LEFT);
-  textSize(100);
-  text(`speed: `, 10, 100);
+  textSize(50);
+
+  text(`diameter: ${diameter}`, 10, 100);
   text(`turns: ${turns}`, 10, 200);
+  text(`total distance: ${distance}`, 10, 400);
+  text(`speed: ${speed}`, 10, 500);
 }
 
-function getSpeed() {}
+function updateSpeed() {
+  const dist = getInstantDistance();
+  speed = dist / 12; // speed unit: feet/sec
+}
+
+function getInstantDistance() {
+  // calculate the distance since last excution of this function
+  const instantDistance = distance - previousInstantDistance;
+  // store current distance as ${previousInstantDistance} for next time
+  previousInstantDistance = distance;
+  return instantDistance;
+}
+
+function updateDistance() {
+  // alculate the total distance since the begining
+  distance = turns * PI * diameter;
+}
 
 // A function to set rotation counts back to 0
 function resetData() {

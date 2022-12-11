@@ -38,7 +38,7 @@ void loop()
     // Send the value
     bleSerial.println(counter);
     // Wait for 0.1 second
-    delay(100);
+    delay(10);
   }
 }
 

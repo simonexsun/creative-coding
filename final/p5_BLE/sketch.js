@@ -120,7 +120,7 @@ function draw() {
   fill(0);
   text(`diameter: ${diameter} inches`, 10, 100);
   text(`turns: ${turns} times`, 10, 200);
-  text(`total distance: ${updateDistance() / 12} feet`, 10, 400);
+  text(`total distance: ${round(updateDistance() / 63360, 2)} miles`, 10, 400);
   text(`instant speed: ${speed} turns/sec (${mph(speed)} mph)`, 10, 500);
 
   fill(randomColor);

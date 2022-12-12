@@ -237,3 +237,5 @@ function randomInt(min, max) {
     max = min;
     min = 0;
   }
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
+}

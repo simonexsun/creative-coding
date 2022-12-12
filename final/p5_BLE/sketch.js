@@ -132,10 +132,10 @@ function draw() {
   stroke(randomColor);
 
   // for gyroscope sensor to control the tunnel direction
-  let moveX = map(mouseX, 0, width, width / 2 + 10, width / 2 - 10);
-  let moveY = map(mouseY, 0, width, height / 2 + 10, height / 2 - 10);
-  rotateY(-1 * atan2(height / 2, width / 2 - mouseX) + radians(-90));
-  rotateX(-1 * atan2(height / 2, width / 2 - mouseY) + radians(-90));
+  // let moveX = map(mouseX, 0, width, width / 2 + 10, width / 2 - 10);
+  // let moveY = map(mouseY, 0, width, height / 2 + 10, height / 2 - 10);
+  // rotateY(-1 * atan2(height / 2, width / 2 - mouseX) + radians(-90));
+  // rotateX(-1 * atan2(height / 2, width / 2 - mouseY) + radians(-90));
 
   let mappedSpeed = map(speed, 0, 25, 2, 20);
   for (let i = 0; i < grid.pos.length; i++) {

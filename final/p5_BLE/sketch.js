@@ -94,20 +94,33 @@ let offset = 0;
 const targetFrameRate = 60;
 
 let randomColor;
+let grid, w, h;
+let start_sz = 150;
 
 /*
 UI functions 
 */
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight * 0.9);
+  createCanvas(windowWidth, windowHeight * 0.9, WEBGL);
   bleSetup();
   frameRate(targetFrameRate);
   randomColor = color(random(100, 255), random(100, 255), random(100, 255));
+
+  w = width;
+  h = height;
+  grid = new simpleGrid(30, 1);
+  for (let i = 0; i < grid.pos.length; i++) {
+    let g = grid.pos[i];
+    g.x = w / 2;
+    g.y = h / 2;
+    g.z = i * 20;
+    g.sz.x = start_sz + i * 35;
+  }
 }
 
 function draw() {
-  background("#f5f6fa");
+  background(0);
   updateDistance();
   // update speed every second
   const multiplier = 5;
@@ -115,11 +128,30 @@ function draw() {
     updateSpeed();
   }
 
+  // tunnel animation
+  stroke(randomColor);
 
-  fill(randomColor);
-  noStroke();
-  let mappedSpeed = map(speed, 0, 25, 100, 500);
-  ellipse(width / 2, height / 2, mappedSpeed);
+  let mappedSpeed = map(speed, 0, 25, 2, 20);
+  for (let i = 0; i < grid.pos.length; i++) {
+    let g = grid.pos[i];
+    push();
+    translate(0, 0, g.z);
+    strokeWeight(g.z / 300);
+    g.sz.x += 1;
+    g.z += mappedSpeed;
+    ellipse(0, 0, g.sz.x, g.sz.x, 50);
+    if (g.z > 460) {
+      g.z = 0;
+      g.sz.x = start_sz;
+    }
+    pop();
+  }
+
+  // // dot
+  // fill(randomColor);
+  // noStroke();
+  // let mappedSpeed = map(speed, 0, 25, 100, 500);
+  // ellipse(width / 2, height / 2, mappedSpeed);
 }
 
 // convert turns per second to miles per hour
@@ -164,3 +196,44 @@ function updateCounter(value) {
   lastCounter = value;
   turns = value - offset;
 }
+
+// Tunnel animation function
+function simpleGrid(nx, ny, _w, _h) {
+  this.w = _w || width;
+  this.h = _h || height;
+  this.pos = [];
+  this.cols = nx;
+  this.rows = ny;
+  noFill();
+  this.sz = this.start_sz = {
+    x: this.w / nx,
+    y: this.h / ny,
+  };
+  var i = 0;
+  for (y = 0; y < ny; y++) {
+    for (x = 0; x < nx; x++) {
+      this.pos.push({
+        me: i,
+        x: x * this.sz.x + this.sz.x / 2,
+        y: y * this.sz.y + this.sz.y / 2,
+        start_x: x * this.sz.x,
+        start_y: y * this.sz.y,
+        sz: {
+          x: this.sz.x,
+          y: this.sz.y,
+        },
+        row: y,
+        col: x,
+        t: [],
+      });
+      i++;
+    }
+  }
+  this.length = this.pos.length;
+}
+
+function randomInt(min, max) {
+  if (max === undefined) {
+    max = min;
+    min = 0;
+  }

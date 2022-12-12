@@ -203,7 +203,7 @@ function updateCounter(value) {
   turns = value - offset;
 }
 
-// Tunnel animation function
+// Tunnel animation function from https://editor.p5js.org/ronikaufman/sketches/dY8vMHvdX
 function simpleGrid(nx, ny, _w, _h) {
   this.w = _w || width;
   this.h = _h || height;

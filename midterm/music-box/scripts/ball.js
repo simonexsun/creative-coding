@@ -33,7 +33,7 @@ class Ball {
     // inspired by N1U on dribble https://dribbble.com/shots/11429742-Defend-the-Cube
     this.color = color(255, 205, 0); // yellow
     stroke(this.color);
-    strokeWeight(5);
+    strokeWeight(2);
     let intensity = map(input, 239, 328, 50, 15) * vol;
 
     // bounce independently

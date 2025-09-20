@@ -68,18 +68,18 @@ function draw() {
   textFont(myFont);
   fill(red(255), green(255), blue(255), 0.6 * 255);
   textAlign(CENTER, BOTTOM);
-  textSize(12);
-  text("Music by Helios. Interaction by Simone. JavaScript, P5js. ", -width / 2, height * 0.45, width);
+  textSize(16);
+  text("Interaction by Simone. JavaScript, P5js. ", -width / 2, height * 0.45, width);
   // text("Music by Helios. Art by Simone", -width / 2, height * 0.45, width);
   textSize(30);
   fill("White");
   if (!isPlaying) {
-    text("Unmute", -width / 2, height * 0.35, width);
+    text("Unmute", -width / 2, 0, width);
     pop();
 
-    showUI();
+    hideUI();
   } else {
-    text("Mute", -width / 2, height * 0.35, width);
+    text("Mute", -width / 2, 0, width);
     pop();
 
     showUI();
@@ -114,14 +114,23 @@ function draw() {
 }
 
 function mousePressed() {
-  if (mouseY > height * 0.8) {
+  // Toggle play/pause when clicking within the center 20% area of the canvas
+  let centerX = width * 0.4;
+  let centerY = height * 0.4;
+  let areaW = width * 0.2;
+  let areaH = height * 0.2;
+  if (
+    mouseX > centerX &&
+    mouseX < centerX + areaW &&
+    mouseY > centerY &&
+    mouseY < centerY + areaH
+  ) {
     isPlaying = !isPlaying;
     if (!isPlaying) {
-      // hideUI();
-      // showUI();
+      hideUI();
       pauseSoundTracks();
     } else {
-      // showUI();
+      showUI();
       loopSoundTracks();
     }
   }

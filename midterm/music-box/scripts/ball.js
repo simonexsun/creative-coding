@@ -9,8 +9,8 @@ class Ball {
   }
 
   circle(vol, input) {
-    this.d = 80;
-    this.color = color(169, 215, 105); // green
+    this.d = 30;
+    this.color = color(169, 255, 105); // green
 
     push();
     noStroke();

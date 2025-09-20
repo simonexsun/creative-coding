@@ -61,21 +61,22 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(0);
 
   //display text
   push();
   textFont(myFont);
-  fill("Black");
+  fill(red(255), green(255), blue(255), 0.6 * 255);
   textAlign(CENTER, BOTTOM);
-  textSize(18);
-  text("Music by Helios. Art by Simone", -width / 2, height * 0.4, width);
+  textSize(12);
+  text("Music by Helios. Art by Simone", -width / 2, height * 0.45, width);
   textSize(30);
+  fill("White");
   if (!isPlaying) {
-    text("Play", -width / 2, height * 0.35, width);
+    text("Unmute", -width / 2, height * 0.35, width);
     pop();
 
-    hideUI();
+    showUI();
   } else {
     text("Mute", -width / 2, height * 0.35, width);
     pop();
@@ -115,10 +116,11 @@ function mousePressed() {
   if (mouseY > height * 0.8) {
     isPlaying = !isPlaying;
     if (!isPlaying) {
-      hideUI();
+      // hideUI();
+      // showUI();
       pauseSoundTracks();
     } else {
-      showUI();
+      // showUI();
       loopSoundTracks();
     }
   }

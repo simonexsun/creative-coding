@@ -69,7 +69,8 @@ function draw() {
   fill(red(255), green(255), blue(255), 0.6 * 255);
   textAlign(CENTER, BOTTOM);
   textSize(12);
-  text("Music by Helios. Art by Simone", -width / 2, height * 0.45, width);
+  text("Music by Helios. Interaction by Simone. JavaScript, P5js. ", -width / 2, height * 0.45, width);
+  // text("Music by Helios. Art by Simone", -width / 2, height * 0.45, width);
   textSize(30);
   fill("White");
   if (!isPlaying) {

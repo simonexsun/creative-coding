@@ -7,7 +7,7 @@ class Box {
   display(input) {
     let intensity = map(input, -55, 55, 0.05, 0);
     noFill();
-    strokeWeight(0.5);
+    strokeWeight(2);
     stroke(this.color);
     push();
     rotateX(frameCount * intensity);

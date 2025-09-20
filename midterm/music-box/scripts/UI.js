@@ -14,9 +14,10 @@ class UI {
 
     if (dist(mouseX, mouseY, this.x, this.y) <= this.h / 2 - this.w / 2) {
       // highlight on hover
-      fill(255, 255, 255, 20);
+      fill(red(this.color), green(this.color), blue(this.color), 0.2 * 255);
       noStroke();
       ellipse(this.x, this.y, this.h);
+      ellipse
       // interaction on mouse pressed
       if (mouseIsPressed) {
         // thicken ellipse stroke
@@ -197,27 +198,23 @@ class BoxUI extends UI {
     rotateX(radians(0));
     rotateY(radians(-30));
 
-    // display box (static)
-    fill(105, 204, 215, 50);
-    strokeWeight(0.5);
-    stroke(this.color);
-    box(this.h / 4);
-
     // display tracks around the box (animated)
     noFill();
     strokeWeight(this.thickness);
     let ellipseW = this.h;
-    // ellipse "\"
+    // square "\"
     push();
     rotateX(radians(80));
     rotateY(this.theta);
-    ellipse(0, 0, ellipseW);
+    rectMode(CENTER);
+    rect(0, 0, ellipseW, ellipseW);
     pop();
-    // ellipse "/"
+    // square "/"
     push();
     rotateX(radians(80));
     rotateY(-this.theta);
-    ellipse(0, 0, ellipseW);
+    rectMode(CENTER);
+    rect(0, 0, ellipseW, ellipseW);
     pop();
 
     // display indicator (animated)

@@ -61,23 +61,23 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
 
   //display text
   push();
   textFont(myFont);
-  fill("white");
+  fill("Black");
   textAlign(CENTER, BOTTOM);
   textSize(18);
   text("Music by Helios. Art by Simone", -width / 2, height * 0.4, width);
   textSize(30);
   if (!isPlaying) {
-    text("click here to open music box", -width / 2, height * 0.35, width);
+    text("Play", -width / 2, height * 0.35, width);
     pop();
 
     hideUI();
   } else {
-    text("click here to close music box", -width / 2, height * 0.35, width);
+    text("Mute", -width / 2, height * 0.35, width);
     pop();
 
     showUI();
@@ -96,8 +96,6 @@ function draw() {
   let drumsVol = drumsAmp.getLevel();
   let tuneVol = tuneAmp.getLevel();
   let passageVol = passageAmp.getLevel();
-
-  // showUI();
 
   // operate object methods
   lines.amplify(ambientVol, lineUI.lineY); // visualizes ambient
@@ -120,6 +118,7 @@ function mousePressed() {
       hideUI();
       pauseSoundTracks();
     } else {
+      showUI();
       loopSoundTracks();
     }
   }

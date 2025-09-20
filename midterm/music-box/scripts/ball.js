@@ -9,7 +9,7 @@ class Ball {
   }
 
   circle(vol, input) {
-    this.d = 25;
+    this.d = 80;
     this.color = color(169, 215, 105); // green
 
     push();
@@ -31,9 +31,9 @@ class Ball {
 
   bounce(vol, input) {
     // inspired by N1U on dribble https://dribbble.com/shots/11429742-Defend-the-Cube
-    this.color = color(215, 190, 105); // golden
+    this.color = color(255, 205, 0); // yellow
     stroke(this.color);
-    strokeWeight(1);
+    strokeWeight(5);
     let intensity = map(input, 239, 328, 50, 15) * vol;
 
     // bounce independently
